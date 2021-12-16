@@ -1,6 +1,6 @@
 @extends('layouts.app',['activePage' => 'delivery_zone'])
 
-@section('title','show delivery person')
+@section('title','show Fleet Operator')
 
 @section('content')
 
@@ -9,20 +9,21 @@
         <h1>{{__('Show delivery zone')}}</h1>
         <div class="section-header-breadcrumb">
             @if(Auth::user()->load('roles')->roles->contains('title', 'admin'))
-                <div class="breadcrumb-item active"><a href="{{ url('admin/home') }}">{{__('Dashboard')}}</a></div>
-                <div class="breadcrumb-item"><a href="{{ url('admin/delivery_zone') }}">{{__('Delivery zone')}}</a></div>
-                <div class="breadcrumb-item">{{__('Show Delivery zone')}}</div>
+            <div class="breadcrumb-item active"><a href="{{ url('admin/home') }}">{{__('Dashboard')}}</a></div>
+            <div class="breadcrumb-item"><a href="{{ url('admin/delivery_zone') }}">{{__('Delivery zone')}}</a></div>
+            <div class="breadcrumb-item">{{__('Show Operating zone')}}</div>
             @endif
             @if(Auth::user()->load('roles')->roles->contains('title', 'vehicle'))
-                <div class="breadcrumb-item active"><a href="{{ url('vehicle/vehicle_home') }}">{{__('Dashboard')}}</a></div>
-                <div class="breadcrumb-item"><a href="{{ url('vehicle/deliveryZone') }}">{{__('Delivery zone')}}</a></div>
-                <div class="breadcrumb-item">{{__('Show Delivery zone')}}</div>
+            <div class="breadcrumb-item active"><a href="{{ url('vehicle/vehicle_home') }}">{{__('Dashboard')}}</a>
+            </div>
+            <div class="breadcrumb-item"><a href="{{ url('vehicle/deliveryZone') }}">{{__('Delivery zone')}}</a></div>
+            <div class="breadcrumb-item">{{__('Show Operating zone')}}</div>
             @endif
         </div>
     </div>
 
     <div class="section-body">
-        <h2 class="section-title">{{__('Delivery zone area management')}}</h2>
+        <h2 class="section-title">{{__('Operating zone area management')}}</h2>
         <p class="section-lead">{{__('Delivery zone Area.')}}</p>
 
         <input type="hidden" name="delivery_zone_id" id="delivery_zone_id" value="{{$delivery_zone->id}}">
@@ -33,10 +34,12 @@
                         <div class="card w-75">
                             <div class="card-body">
                                 <h5 class="text-dark">{{ $delivery_zone->name }}</h5>
-                                <p>{{__('Zone admin name : ')}} <span class="font-weight-bold">{{ $delivery_zone->admin_name }}</span></p>
-                                <p>{{__('number of delivery person  : ')}} <span class="font-weight-bold">{{ count($delivery_persons) }}</span></p>
+                                <p>{{__('Zone admin name : ')}} <span
+                                        class="font-weight-bold">{{ $delivery_zone->admin_name }}</span></p>
+                                <p>{{__('number of delivery person  : ')}} <span
+                                        class="font-weight-bold">{{ count($delivery_persons) }}</span></p>
                                 <a href="javascript:void(0);" class="btn btn-primary float-right" data-toggle="modal"
-                                data-target="#show_delivery_person">{{__('View delivery person')}}</a>
+                                    data-target="#show_delivery_person">{{__('View delivery person')}}</a>
                             </div>
                         </div>
                     </div>
@@ -45,33 +48,39 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12 col-12 text-right">
-                                        <button type="button" class="btn btn-primary p-1" data-toggle="modal" data-target="#staticBackdrop">{{__('Add Area')}}</button>
+                                        <button type="button" class="btn btn-primary p-1" data-toggle="modal"
+                                            data-target="#staticBackdrop">{{__('Add Area')}}</button>
                                     </div>
                                 </div>
 
                                 @foreach ($areas as $area)
-                                    @if ($loop->iteration == 1)
-                                        @php
-                                            $first = $area;
-                                        @endphp
-                                        @break
-                                    @endif
+                                @if ($loop->iteration == 1)
+                                @php
+                                $first = $area;
+                                @endphp
+                                @break
+                                @endif
                                 @endforeach
                                 <ul class="nav nav-pills nav-pills-rose nav-pills-icons flex-column" role="tablist">
                                     @foreach ($areas as $area)
-                                        <li class="nav-item mt-2">
-                                            <div class="nav-link w-100 h-100 {{ $loop->iteration == 1 ? 'active show' : '' }}" onclick="delivery_zone_area_map({{ $area->id }})" data-toggle="tab" href="#link110" role="tablist">
-                                                {{ $area->name }}
-                                                <span>
-                                                    <a class="float-right text-light" data-toggle="modal" data-target="#edit_delivery_zone" onclick="edit_delivery_person({{$area->id}})">
-                                                        <i class="fas fa-pencil-alt"></i>
-                                                    </a>
-                                                    <a href="javascript:void(0);" class="ml-2 float-right text-light" onclick="deleteData('admin/delivery_zone_area',{{ $area->id }},'Delivery Zone Area')">
-                                                        <i class="fas fa-trash"></i>
-                                                    </a>
-                                                </span>
-                                            </div>
-                                        </li>
+                                    <li class="nav-item mt-2">
+                                        <div class="nav-link w-100 h-100 {{ $loop->iteration == 1 ? 'active show' : '' }}"
+                                            onclick="delivery_zone_area_map({{ $area->id }})" data-toggle="tab"
+                                            href="#link110" role="tablist">
+                                            {{ $area->name }}
+                                            <span>
+                                                <a class="float-right text-light" data-toggle="modal"
+                                                    data-target="#edit_delivery_zone"
+                                                    onclick="edit_delivery_person({{$area->id}})">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </a>
+                                                <a href="javascript:void(0);" class="ml-2 float-right text-light"
+                                                    onclick="deleteData('admin/delivery_zone_area',{{ $area->id }},'Delivery Zone Area')">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -107,7 +116,8 @@
     </div>
 </section>
 
-<div class="modal fade" id="show_delivery_person" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="show_delivery_person" tabindex="-1" aria-labelledby="staticBackdropLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -117,7 +127,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <table id="datatable" class="table table-striped table-bordered text-center" cellspacing="0" width="100%">
+                <table id="datatable" class="table table-striped table-bordered text-center" cellspacing="0"
+                    width="100%">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -128,14 +139,14 @@
                     </thead>
                     <tbody>
                         @foreach ($delivery_persons as $delivery_person)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>
-                                    <img src="{{ $delivery_person->image }}" width="50" height="50" alt="">
-                                </td>
-                                <td>{{ $delivery_person->first_name }}&nbsp;{{ $delivery_person->last_name }}</td>
-                                <td>{{ $delivery_person->status }}</td>
-                            </tr>
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>
+                                <img src="{{ $delivery_person->image }}" width="50" height="50" alt="">
+                            </td>
+                            <td>{{ $delivery_person->first_name }}&nbsp;{{ $delivery_person->last_name }}</td>
+                            <td>{{ $delivery_person->status }}</td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -170,16 +181,16 @@
                     </div>
                 </div>
                 @if(Auth::user()->load('roles')->roles->contains('title', 'admin'))
-                    <div class="row pt-3">
-                        <div class="col-md-12">
-                            <label for="">{{__('Vehicle')}}</label>
-                            <select name="vehicle_id[]" class="select2" multiple>
-                                @foreach ($vehicles as $vehicle)
-                                    <option value="{{ $vehicle->id }}">{{ $vehicle->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                <div class="row pt-3">
+                    <div class="col-md-12">
+                        <label for="">{{__('Vehicle')}}</label>
+                        <select name="vehicle_id[]" class="select2" multiple>
+                            @foreach ($vehicles as $vehicle)
+                            <option value="{{ $vehicle->id }}">{{ $vehicle->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
+                </div>
                 @endif
                 <div class="row pt-3">
                     <div class="col-md-6">
@@ -217,7 +228,8 @@
     </div>
 </div>
 
-<div class="modal fade bd-example-modal-lg" id="edit_delivery_zone" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" id="edit_delivery_zone" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">

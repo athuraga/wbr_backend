@@ -115,7 +115,7 @@
 
             <div class="card mt-2">
                 <div class="card-header">
-                    <h6 class="c-grey-900">{{__('Select Tags (For Restaurants it will be vehicletypes)')}}<span
+                    <h6 class="c-grey-900">{{__('Select Tags (For Vehicles it will be vehicletypes)')}}<span
                             class="text-danger">&nbsp;*</span></h6>
                 </div>
                 <div class="card-body">
@@ -158,8 +158,9 @@
                                             <input id="pac-input" type="text" name="map_address"
                                                 value="{{ old('map_address') }}" class="form-control"
                                                 placeholder="Enter A Location" />
-                                            <input type="hidden" name="lat" value="{{22.3039}}" id="lat">
-                                            <input type="hidden" name="lang" value="{{70.8022}}" id="lang">
+                                            <input type="hidden" name="lat" value="{{57.708870}}" id="lat">
+                                            <input type="hidden" name="lang" value="{{11.974560}}" id="lang">
+
                                         </div>
                                     </div>
                                 </div>
@@ -189,10 +190,10 @@
                     <div class="mT-30">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="min_order_amount">{{__('Minimum order amount')}}<span
+                                <label for="min_order_amount">{{__('Minimum ride amount')}}<span
                                         class="text-danger">&nbsp;*</span></label>
                                 <input type="number" min=1 name="min_order_amount"
-                                    placeholder="{{__('Minimum Order Amount')}}" value="{{ old('min_order_amount') }}"
+                                    placeholder="{{__('Minimum Ride Amount')}}" value="{{ old('min_order_amount') }}"
                                     required class="form-control @error('min_order_amount') invalid @enderror">
 
                                 @error('min_order_amount')
@@ -202,11 +203,11 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="for_two_person">{{__('Cost of two person')}}<span
+                                <label for="for_two_person">{{__('Cost per minute')}}<span
                                         class="text-danger">&nbsp;*</span></label>
-                                <input type="number" min=1 name="for_two_person"
-                                    placeholder="{{__('Cost Of Two Person')}}" value="{{ old('for_two_person') }}"
-                                    required class="form-control  @error('for_two_person') invalid @enderror">
+                                <input type="number" min=1 name="for_two_person" placeholder="{{__('€/min')}}"
+                                    value="{{ old('for_two_person') }}" required
+                                    class="form-control  @error('for_two_person') invalid @enderror">
 
                                 @error('min_order_amount')
                                 <span class="custom_error" role="alert">
@@ -217,7 +218,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6 mb-3">
+                            <!-- <div class="col-md-6 mb-3">
                                 <label for="avg_delivery_time">{{__('Avg. delivery time(in min)')}}<span
                                         class="text-danger">&nbsp;*</span></label>
                                 <input type="number" min=1 name="avg_delivery_time"
@@ -230,12 +231,12 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-                            </div>
+                            </div> -->
                             <div class="col-md-6 mb-3">
-                                <label for="license_number">{{__('Business License number')}}<span
+                                <label for="license_number">{{__('vehicle identification number')}}<span
                                         class="text-danger">&nbsp;*</span></label>
                                 <input type="text" name="license_number" value="{{ old('license_number') }}" required
-                                    placeholder="{{__('Business License Number')}}"
+                                    placeholder="{{__('vehicle identification number')}}"
                                     class="form-control @error('license_number') is-invalid @enderror">
 
                                 @error('license_number')
@@ -246,7 +247,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="admin_comission_type">{{__('Admin commission type')}}<span
                                         class="text-danger">&nbsp;*</span></label>
@@ -279,7 +280,7 @@
                                 </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
@@ -289,15 +290,15 @@
                                     <option value="all"
                                         {{ (collect(old('vehicle_type'))->contains('all')) ? 'selected':'' }}>
                                         {{__('All')}}</option>
-                                    <option value="veg"
-                                        {{ (collect(old('vehicle_type'))->contains('veg')) ? 'selected':'' }}>
-                                        {{__('pure veg')}}</option>
-                                    <option value="non_veg"
-                                        {{ (collect(old('vehicle_type'))->contains('non_veg')) ? 'selected':'' }}>
-                                        {{__('none veg')}}</option>
-                                    <option value="non_applicable"
-                                        {{ (collect(old('vehicle_type'))->contains('non_applicable')) ? 'selected':'' }}>
-                                        {{__('non applicable')}}</option>
+                                    <option value="Bike"
+                                        {{ (collect(old('vehicle_type'))->contains('Bike')) ? 'selected':'' }}>
+                                        {{__('Bike')}}</option>
+                                    <option value="Scooter"
+                                        {{ (collect(old('vehicle_type'))->contains('Scooter')) ? 'selected':'' }}>
+                                        {{__('Scooter')}}</option>
+                                    <option value="Bicycle"
+                                        {{ (collect(old('vehicle_type'))->contains('Bicycle')) ? 'selected':'' }}>
+                                        {{__('Bicycle')}}</option>
                                 </select>
                             </div>
 
@@ -333,7 +334,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="tax">{{__('GSTIN(%)')}}<span class="text-danger">&nbsp;*</span></label>
                                 <input type="text" name="tax" value="{{ old('tax') }}"
@@ -348,14 +349,14 @@
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-md-12 mb-3">
                                 <input type="checkbox" id="chkbox" name="vehicle_own_driver">
                                 <label for="chkbox">{{__('Vehicle Has Own Driver??')}}</label>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="row">
                             <div class="col-md-12">
@@ -366,7 +367,7 @@
                                 </label>
                             </div>
                         </div>
-
+                        <!-- 
                         <div class="row">
                             <div class="col-md-12">
                                 <label for="Explorer">{{__('Explorer ??')}}</label><br>
@@ -385,7 +386,7 @@
                                     <div class="slider"></div>
                                 </label>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary">{{__('Add Vehicle')}}</button>
                         </div>

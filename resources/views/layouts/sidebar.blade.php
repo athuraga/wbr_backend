@@ -78,7 +78,7 @@
             @if(Auth::user()->load('roles')->roles->contains('title', 'admin'))
             <li class="{{ $activePage == 'delivery_zone' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('admin/delivery_zone') }}">
-                    <i class="fas fa-users text-success"></i><span>{{__('Delivery zone')}}</span>
+                    <i class="fas fa-users text-success"></i><span>{{__('Operating zone')}}</span>
                 </a>
             </li>
             @endif
@@ -87,7 +87,7 @@
             @if (Session::get('vehicle_driver') == 1)
             <li class="{{ $activePage == 'delivery_zone' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('vehicle/deliveryZone') }}">
-                    <i class="fas fa-users text-success"></i><span>{{__('Delivery zone')}}</span>
+                    <i class="fas fa-users text-success"></i><span>{{__('Operating zone')}}</span>
                 </a>
             </li>
             @endif
@@ -98,7 +98,7 @@
             <li class="{{ $activePage == 'order' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('admin/order') }}">
                     <i class="fas fa-sort text-dark"></i>
-                    <span>{{__('Order')}}</span>
+                    <span>{{__('Rides')}}</span>
                 </a>
             </li>
             @endcan
@@ -108,7 +108,7 @@
             <li class="{{ $activePage == 'delivery_person' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('admin/delivery_person') }}">
                     <i class="fab fa-red-river text-danger"></i>
-                    <span class="nav-link-text">{{__('Delivery person')}}</span>
+                    <span class="nav-link-text">{{__('Fleet Operator')}}</span>
                 </a>
             </li>
             @endif
@@ -117,12 +117,22 @@
             <li class="{{ $activePage == 'delivery_person' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('vehicle/deliveryPerson') }}">
                     <i class="fab fa-red-river text-danger"></i>
-                    <span class="nav-link-text">{{__('Delivery person')}}</span>
+                    <span class="nav-link-text">{{__('Fleet Operator')}}</span>
                 </a>
             </li>
             @endif
             @endif
             @endcan
+
+            @can('map')
+            <li class="{{ $activePage == 'map' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('admin/map') }}">
+                    <i class="fas fa-tags text-info"></i>
+                    <span class="nav-link-text">{{__('Map')}}</span>
+                </a>
+            </li>
+            @endcan
+
 
             @can('promo_code_access')
             <li class="{{ $activePage == 'promo_code' ? 'active' : '' }}">

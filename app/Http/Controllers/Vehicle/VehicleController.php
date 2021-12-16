@@ -97,12 +97,12 @@ class VehicleController extends Controller
             'name' => 'required',
             'vehicletype_id' => 'bail|required',
             'address' => 'required',
-            'min_order_amount' => 'required',
-            'for_two_person' => 'required',
-            'avg_delivery_time' => 'required',
+            // 'min_order_amount' => 'required',
+            // 'for_two_person' => 'required',
+            // 'avg_delivery_time' => 'required',
             'license_number' => 'required',
             'vehicle_type' => 'required',
-            'time_slot' => 'required',
+            // 'time_slot' => 'required',
             'contact' => 'required|max:15'
         ]);
         $data = $request->all();

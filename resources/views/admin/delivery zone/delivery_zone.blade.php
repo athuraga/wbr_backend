@@ -1,49 +1,51 @@
 @extends('layouts.app',['activePage' => 'delivery_zone'])
 
-@section('title','Delivery Zone')
+@section('title','Operating Zone')
 
 @section('content')
 
 <section class="section">
     @if (Session::has('msg'))
     <script>
-        var msg = "<?php echo Session::get('msg'); ?>"
-            $(window).on('load', function()
-            {
-                iziToast.success({
-                    message: msg,
-                    position: 'topRight'
-                });
-            });
+    var msg = "<?php echo Session::get('msg'); ?>"
+    $(window).on('load', function() {
+        iziToast.success({
+            message: msg,
+            position: 'topRight'
+        });
+    });
     </script>
     @endif
     <div class="section-header">
         <h1>{{__('Delivery zone')}}</h1>
         <div class="section-header-breadcrumb">
             @if(Auth::user()->load('roles')->roles->contains('title', 'admin'))
-                <div class="breadcrumb-item active"><a href="{{ url('admin/home') }}">{{__('Dashboard')}}</a></div>
-                <div class="breadcrumb-item">{{__('Delivery zone')}}</div>
+            <div class="breadcrumb-item active"><a href="{{ url('admin/home') }}">{{__('Dashboard')}}</a></div>
+            <div class="breadcrumb-item">{{__('Operating zone')}}</div>
             @endif
             @if(Auth::user()->load('roles')->roles->contains('title', 'vehicle'))
-                <div class="breadcrumb-item active"><a href="{{ url('vehicle/vehicle_home') }}">{{__('Dashboard')}}</a></div>
-                <div class="breadcrumb-item">{{__('Delivery zone')}}</div>
+            <div class="breadcrumb-item active"><a href="{{ url('vehicle/vehicle_home') }}">{{__('Dashboard')}}</a>
+            </div>
+            <div class="breadcrumb-item">{{__('Operating zone')}}</div>
             @endif
         </div>
     </div>
 
     <div class="section-body">
-        <h2 class="section-title">{{__('Delivery Zone Management')}}</h2>
+        <h2 class="section-title">{{__('Operating Zone Management')}}</h2>
         <p class="section-lead">{{__('Add, Edit, Manage Delivery Zone.')}}</p>
         <div class="card">
             <div class="card-header">
                 <div class="w-100">
                     @can('delivery_zone_add')
-                        @if(Auth::user()->load('roles')->roles->contains('title', 'admin'))
-                            <a href="{{ url('admin/delivery_zone/create') }}" class="btn btn-primary float-right">{{__('Add New')}}</a>
-                        @endif
-                        @if(Auth::user()->load('roles')->roles->contains('title', 'vehicle'))
-                            <a href="{{ url('vehicle/deliveryZone/create') }}" class="btn btn-primary float-right">{{__('Add New')}}</a>
-                        @endif
+                    @if(Auth::user()->load('roles')->roles->contains('title', 'admin'))
+                    <a href="{{ url('admin/delivery_zone/create') }}"
+                        class="btn btn-primary float-right">{{__('Add New')}}</a>
+                    @endif
+                    @if(Auth::user()->load('roles')->roles->contains('title', 'vehicle'))
+                    <a href="{{ url('vehicle/deliveryZone/create') }}"
+                        class="btn btn-primary float-right">{{__('Add New')}}</a>
+                    @endif
                     @endcan
                 </div>
             </div>
@@ -57,7 +59,7 @@
                                     <label for="master"></label>
                                 </th>
                                 <th>#</th>
-                                <th>{{__('Delivery Zone name')}}</th>
+                                <th>{{__('Operating Zone name')}}</th>
                                 <th>{{__('Contact')}}</th>
                                 <th>{{__('Admin Name')}}</th>
                                 <th>{{__('Email')}}</th>
@@ -71,7 +73,8 @@
                             @foreach ($deliveryZones as $deliveryZone)
                             <tr>
                                 <td>
-                                    <input name="id[]" value="{{$deliveryZone->id}}" id="{{$deliveryZone->id}}" data-id="{{ $deliveryZone->id }}" class="sub_chk" type="checkbox" />
+                                    <input name="id[]" value="{{$deliveryZone->id}}" id="{{$deliveryZone->id}}"
+                                        data-id="{{ $deliveryZone->id }}" class="sub_chk" type="checkbox" />
                                     <label for="{{$deliveryZone->id}}"></label>
                                 </td>
                                 <td>{{ $loop->iteration }}</td>
@@ -90,33 +93,45 @@
                                 @if(Gate::check('delivery_zone_access'))
                                 <td class="d-flex justify-content-center">
                                     @can('delivery_zone_access')
-                                        @if(Auth::user()->load('roles')->roles->contains('title', 'admin'))
-                                            <a href="{{ url('admin/delivery_zone_area/'.$deliveryZone->id) }}" class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="" data-original-title="{{__('View Delivery zone')}}"><i class="fas fa-eye"></i></a>
-                                        @endif
-                                        @if(Auth::user()->load('roles')->roles->contains('title', 'vehicle'))
-                                            <a href="{{ url('vehicle/deliveryZoneArea/'.$deliveryZone->id) }}" class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="" data-original-title="{{__('View Delivery zone')}}"><i class="fas fa-eye"></i></a>
-                                        @endif
+                                    @if(Auth::user()->load('roles')->roles->contains('title', 'admin'))
+                                    <a href="{{ url('admin/delivery_zone_area/'.$deliveryZone->id) }}"
+                                        class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title=""
+                                        data-original-title="{{__('View Delivery zone')}}"><i
+                                            class="fas fa-eye"></i></a>
+                                    @endif
+                                    @if(Auth::user()->load('roles')->roles->contains('title', 'vehicle'))
+                                    <a href="{{ url('vehicle/deliveryZoneArea/'.$deliveryZone->id) }}"
+                                        class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title=""
+                                        data-original-title="{{__('View Delivery zone')}}"><i
+                                            class="fas fa-eye"></i></a>
+                                    @endif
                                     @endcan
 
                                     @can('delivery_zone_edit')
-                                        @if(Auth::user()->load('roles')->roles->contains('title', 'admin'))
-                                            <a href="{{ url('admin/delivery_zone/'.$deliveryZone->id.'/edit') }}" class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="" data-original-title="{{__('Edit')}}"><i class="fas fa-pencil-alt"></i></a>
-                                        @endif
-                                        @if(Auth::user()->load('roles')->roles->contains('title', 'vehicle'))
-                                            <a href="{{ url('vehicle/deliveryZone/'.$deliveryZone->id.'/edit') }}" class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="" data-original-title="{{__('Edit')}}"><i class="fas fa-pencil-alt"></i></a>
-                                        @endif
+                                    @if(Auth::user()->load('roles')->roles->contains('title', 'admin'))
+                                    <a href="{{ url('admin/delivery_zone/'.$deliveryZone->id.'/edit') }}"
+                                        class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title=""
+                                        data-original-title="{{__('Edit')}}"><i class="fas fa-pencil-alt"></i></a>
+                                    @endif
+                                    @if(Auth::user()->load('roles')->roles->contains('title', 'vehicle'))
+                                    <a href="{{ url('vehicle/deliveryZone/'.$deliveryZone->id.'/edit') }}"
+                                        class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title=""
+                                        data-original-title="{{__('Edit')}}"><i class="fas fa-pencil-alt"></i></a>
+                                    @endif
                                     @endcan
                                     @can('delivery_zone_delete')
-                                        @if(Auth::user()->load('roles')->roles->contains('title', 'admin'))
-                                            <a href="javascript:void(0);" class="table-action ml-2 btn btn-danger btn-action" onclick="deleteData('admin/delivery_zone',{{ $deliveryZone->id }},'Delivery Zone')">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        @endif
-                                        @if(Auth::user()->load('roles')->roles->contains('title', 'vehicle'))
-                                            <a href="javascript:void(0);" class="table-action ml-2 btn btn-danger btn-action" onclick="deleteData('vehicle/deliveryZone',{{ $deliveryZone->id }},'Delivery Zone')">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        @endif
+                                    @if(Auth::user()->load('roles')->roles->contains('title', 'admin'))
+                                    <a href="javascript:void(0);" class="table-action ml-2 btn btn-danger btn-action"
+                                        onclick="deleteData('admin/delivery_zone',{{ $deliveryZone->id }},'Delivery Zone')">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                    @endif
+                                    @if(Auth::user()->load('roles')->roles->contains('title', 'vehicle'))
+                                    <a href="javascript:void(0);" class="table-action ml-2 btn btn-danger btn-action"
+                                        onclick="deleteData('vehicle/deliveryZone',{{ $deliveryZone->id }},'Delivery Zone')">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                    @endif
                                     @endcan
                                 </td>
                                 @endif
@@ -127,7 +142,8 @@
                 </div>
             </div>
             <div class="card-footer">
-                <input type="button" value="Delete selected" onclick="deleteAll('delivery_zone_multi_delete','Delivery Zone')" class="btn btn-primary">
+                <input type="button" value="Delete selected"
+                    onclick="deleteAll('delivery_zone_multi_delete','Delivery Zone')" class="btn btn-primary">
             </div>
         </div>
     </div>

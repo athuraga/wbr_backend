@@ -133,6 +133,16 @@ class VehicleApiController extends Controller
         }
     }
 
+    public function apiUpdateVehicleLatLang(Request $request)
+    {
+        $request->validate([
+            'lat' => 'required',
+            'lang' => 'required',
+        ]);
+        $vehicle = Vehicle::where('user_id',auth()->user()->id)->first();
+        return response(['success' => true , 'data' => 'update successfully..!']);
+    }
+
     public function apiRegister(Request $request)
     {
         $request->validate([
@@ -140,7 +150,7 @@ class VehicleApiController extends Controller
             'email_id' => 'bail|required|unique:users',
             'password' => 'bail|min:6',
             'phone' => 'bail|required|numeric|digits_between:6,12',
-            'vehicle_own_driver' => 'bail|required',
+           // 'vehicle_own_driver' => 'bail|required',
             'phone_code' => 'bail|required',
         ]);
         $admin_verify_user = GeneralSetting::find(1)->verification;
@@ -169,22 +179,22 @@ class VehicleApiController extends Controller
             'user_id' => $user->id,
             'email_id' => $user->email_id,
             'image' => 'noimage.png',
-            'admin_comission_value' => '33',
+            'admin_comission_value' => '1',
             'contact' => $user->phone,
             'status' => 1,
             'password' => Hash::make($data['password']),
             'isExplorer' => 1,
-            'vehicle_type' => 'veg',
+            'vehicle_type' => 'Scooter',
             'isTop' => 1,
             'vehicle_logo' => 'vehicle-logo.png',
             'password' => Hash::make($data['password']),
-            'vehicle_own_driver' => $request->vehicle_own_driver,
+            'vehicle_own_driver' => 1,//'vehicle_own_driver',
             'time_slot' => '15',
             'vehicle_language' => 'english',
             'vehicletype_id' => $vehicletype_id,
-            'lat' => '22.3039',
-            'lang' => '70.8022',
-            'address' => 'rajkot , gujrat',
+            'lat' => '57.708870',
+            'lang' => '11.974560',
+            'address' => 'Gothenburg, Sweden',
         ]);
 
 
@@ -192,8 +202,8 @@ class VehicleApiController extends Controller
         for($i = 0; $i < count($days); $i++)
         {
             $master = array();
-            $temp['start_time'] = '8:00 am';
-            $temp['end_time'] = '9:00 pm';
+            $temp['start_time'] = '12:01 am';
+            $temp['end_time'] = '11:59 pm';
             array_push($master,$temp);
             $delivery_time['vehicle_id'] = $vehicle->id;
             $delivery_time['period_list'] = json_encode($master);
@@ -207,8 +217,8 @@ class VehicleApiController extends Controller
         for($i = 0; $i < count($days); $i++)
         {
             $master = array();
-            $temp['start_time'] = '8:00 am';
-            $temp['end_time'] = '9:00 pm';
+            $temp['start_time'] = '12:01 am';
+            $temp['end_time'] = '11:59 pm';
             array_push($master,$temp);
             $pickup['vehicle_id'] = $vehicle->id;
             $pickup['period_list'] = json_encode($master);
@@ -222,8 +232,8 @@ class VehicleApiController extends Controller
         for($i = 0; $i < count($days); $i++)
         {
             $master = array();
-            $temp['start_time'] = '8:00 am';
-            $temp['end_time'] = '9:00 pm';
+            $temp['start_time'] = '12:01 am';
+            $temp['end_time'] = '11:59 pm';
             array_push($master,$temp);
             $selling_time['vehicle_id'] = $vehicle->id;
             $selling_time['period_list'] = json_encode($master);
@@ -1043,9 +1053,9 @@ class VehicleApiController extends Controller
             'user_id' => 'required',
             'date' => 'bail|required|date_format:Y-M-D',
             'time' => 'bail|required|date_format:h:i a',
-            'amount' => 'bail|required|numeric',
-            'item' => 'bail|required',
-            'delivery_type' => 'bail|required',
+            // 'amount' => 'bail|required|numeric',
+            // 'item' => 'bail|required',
+            // 'delivery_type' => 'bail|required',
             'address_id' => 'bail|required_if:delivery_type,HOME',
             'delivery_charge' => 'bail|required_if:delivery_type,HOME'
         ]);
@@ -1244,12 +1254,12 @@ class VehicleApiController extends Controller
             'contact' => 'bail|required|numeric|digits_between:6,12',
             'vehicletype_id' => 'bail|required',
             'address' => 'required',
-            'min_order_amount' => 'required',
-            'for_two_person' => 'required',
-            'avg_delivery_time' => 'required',
-            'license_number' => 'required',
-            'vehicle_type' => 'required',
-            'time_slot' => 'required',
+            // 'min_order_amount' => 'required',
+            // 'for_two_person' => 'required',
+            // 'avg_delivery_time' => 'required',
+            // 'license_number' => 'required',
+            // 'vehicle_type' => 'required',
+            // 'time_slot' => 'required',
         ]);
         $data = $request->all();
         if (isset($request->image))

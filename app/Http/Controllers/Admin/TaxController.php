@@ -43,8 +43,8 @@ class TaxController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'bail|required',
-            'tax' => 'bail|required',
+            'name' => 'na',//'bail|required',
+            'tax' => 0,//'bail|required',
         ]);
         $data = $request->all();
         $data['status'] = $request->has('status') ? 1 : 0;
