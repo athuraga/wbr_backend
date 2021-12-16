@@ -218,12 +218,12 @@
                         </div>
 
                         <div class="row">
-                            <!-- <div class="col-md-6 mb-3">
-                                <label for="avg_delivery_time">{{__('Avg. delivery time(in min)')}}<span
+                            <div class="col-md-6 mb-3">
+                                <label for="avg_delivery_time">{{__('Avg. Run Time(in min)/Full Charge5')}}<span
                                         class="text-danger">&nbsp;*</span></label>
                                 <input type="number" min=1 name="avg_delivery_time"
                                     value="{{ old('avg_delivery_time') }}"
-                                    placeholder="{{__('Avg Delivery Time(in min)')}}" required
+                                    placeholder="{{__('Avg. Run Time(in min)/Full Charge')}}" required
                                     class="form-control @error('avg_delivery_time') invalid @enderror">
 
                                 @error('avg_delivery_time')
@@ -231,7 +231,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-                            </div> -->
+                            </div>
                             <div class="col-md-6 mb-3">
                                 <label for="license_number">{{__('vehicle identification number')}}<span
                                         class="text-danger">&nbsp;*</span></label>
@@ -247,9 +247,9 @@
                             </div>
                         </div>
 
-                        <!-- <div class="row">
+                        <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="admin_comission_type">{{__('Admin commission type')}}<span
+                                <label for="admin_comission_type">{{__('Operator commission type')}}<span
                                         class="text-danger">&nbsp;*</span></label>
                                 <select name="admin_comission_type" class="form-control">
                                     <option value="amount"
@@ -268,11 +268,11 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="admin_commision_value">{{__('Admin comission value')}}<span
+                                <label for="admin_commision_value">{{__('operator comission value')}}<span
                                         class="text-danger">&nbsp;*</span></label>
                                 <input type="text" name="admin_comission_value"
                                     value="{{ old('admin_comission_value') }}"
-                                    placeholder="{{__('Admin Comission Value')}}" required class="form-control">
+                                    placeholder="{{__('Operator Comission Value')}}" required class="form-control">
 
                                 @error('admin_commision_value')
                                 <span class="custom_error" role="alert">
@@ -280,7 +280,7 @@
                                 </span>
                                 @enderror
                             </div>
-                        </div> -->
+                        </div>
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
@@ -334,11 +334,12 @@
                             </div>
                         </div>
 
-                        <!-- <div class="row">
+                        <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="tax">{{__('GSTIN(%)')}}<span class="text-danger">&nbsp;*</span></label>
+                                <label for="tax">{{__('Government Tax(%)')}}<span
+                                        class="text-danger">&nbsp;*</span></label>
                                 <input type="text" name="tax" value="{{ old('tax') }}"
-                                    placeholder="{{__('Resturant Tax In %')}}" class="form-control">
+                                    placeholder="{{__('Government Tax In %')}}" class="form-control">
                             </div>
 
                             <div class="col-md-6 mb-3">
@@ -349,7 +350,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                        </div> -->
+                        </div>
 
                         <!-- <div class="row">
                             <div class="col-md-12 mb-3">
