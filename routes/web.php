@@ -85,6 +85,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function ()
         'delivery_zone' => Admin\DeliveryZoneController::class,
         'promo_code' => Admin\PromoCodeController::class,
         'vehicle' => Admin\VehicleController::class,
+        'map' => Admin\MapController::class,
+
         'vehicletype' => Admin\VehicletypeController::class,
         'banner' => Admin\BannerController::class,
         'roles' => Admin\RoleController::class,
