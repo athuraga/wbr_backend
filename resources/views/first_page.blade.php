@@ -1,36 +1,122 @@
 <html>
-	<head>
-		<title>{{__('Food Admin Panel')}}</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-        <style>
 
-	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
-		margin: 0;
-		padding: 0;
-		border: 0;
-		font-size: 100%;
-		font: inherit;
-		vertical-align: baseline;
-	}
+<head>
+    <title>{{__('Weber Mobility')}}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+    html,
+    body,
+    div,
+    span,
+    applet,
+    object,
+    iframe,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    blockquote,
+    pre,
+    a,
+    abbr,
+    acronym,
+    address,
+    big,
+    cite,
+    code,
+    del,
+    dfn,
+    em,
+    img,
+    ins,
+    kbd,
+    q,
+    s,
+    samp,
+    small,
+    strike,
+    strong,
+    sub,
+    sup,
+    tt,
+    var,
+    b,
+    u,
+    i,
+    center,
+    dl,
+    dt,
+    dd,
+    ol,
+    ul,
+    li,
+    fieldset,
+    form,
+    label,
+    legend,
+    table,
+    caption,
+    tbody,
+    tfoot,
+    thead,
+    tr,
+    th,
+    td,
+    article,
+    aside,
+    canvas,
+    details,
+    embed,
+    figure,
+    figcaption,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    output,
+    ruby,
+    section,
+    summary,
+    time,
+    mark,
+    audio,
+    video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+    }
 
 
-/* Box Model */
-	body {
-		background-color: #fff;
-		color: #999999;
-	}
+    /* Box Model */
+    body {
+        background-color: #fff;
+        color: #999999;
+    }
 
-	body, input, select, textarea {
-		font-family: "Scope One", serif;
-		font-size: 13pt;
-		font-weight: 300;
-		line-height: 1.65;
-	}
+    body,
+    input,
+    select,
+    textarea {
+        font-family: "Scope One", serif;
+        font-size: 13pt;
+        font-weight: 300;
+        line-height: 1.65;
+    }
 
     @media screen and (max-width: 1680px) {
 
-        body, input, select, textarea {
+        body,
+        input,
+        select,
+        textarea {
             font-size: 11pt;
         }
 
@@ -38,7 +124,10 @@
 
     @media screen and (max-width: 1280px) {
 
-        body, input, select, textarea {
+        body,
+        input,
+        select,
+        textarea {
             font-size: 11pt;
         }
 
@@ -46,7 +135,10 @@
 
     @media screen and (max-width: 980px) {
 
-        body, input, select, textarea {
+        body,
+        input,
+        select,
+        textarea {
             font-size: 12pt;
         }
 
@@ -54,7 +146,10 @@
 
     @media screen and (max-width: 736px) {
 
-        body, input, select, textarea {
+        body,
+        input,
+        select,
+        textarea {
             font-size: 12pt;
         }
 
@@ -62,36 +157,39 @@
 
     @media screen and (max-width: 480px) {
 
-        body, input, select, textarea {
+        body,
+        input,
+        select,
+        textarea {
             font-size: 12pt;
         }
 
     }
 
-/* Button */
+    /* Button */
 
-	.button {
-		-moz-appearance: none;
-		-webkit-appearance: none;
-		-ms-appearance: none;
-		appearance: none;
-		-moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		border-radius: 4px;
-		border: 0;
-		cursor: pointer;
-		display: inline-block;
-		font-weight: 700;
-		height: 2.85em;
-		line-height: 2.95em;
-		padding: 0 1.5em;
-		text-align: center;
-		text-decoration: none;
-		white-space: nowrap;
+    .button {
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        -ms-appearance: none;
+        appearance: none;
+        -moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        border-radius: 4px;
+        border: 0;
+        cursor: pointer;
+        display: inline-block;
+        font-weight: 700;
+        height: 2.85em;
+        line-height: 2.95em;
+        padding: 0 1.5em;
+        text-align: center;
+        text-decoration: none;
+        white-space: nowrap;
         margin-top: 18px;
-	}
+    }
 
     button.big,
     .button.big {
@@ -107,44 +205,45 @@
 
     }
 
-	.button {
-		background-color: #3498db;
-		color: #fff !important;
-	}
+    .button {
+        background-color: #3498db;
+        color: #fff !important;
+    }
+
     .button:hover {
         background-color: #4aa3df;
     }
 
-/* Banner */
+    /* Banner */
 
-	#banner {
-		display: -ms-flexbox;
-		-ms-flex-pack: center;
-		-ms-flex-align: center;
-		/* padding: 8em 0 6em 0; */
-		-moz-align-items: center;
-		-webkit-align-items: center;
-		-ms-align-items: center;
-		align-items: center;
-		display: -moz-flex;
-		display: -webkit-flex;
-		display: -ms-flex;
-		display: flex;
-		-moz-justify-content: center;
-		-webkit-justify-content: center;
-		-ms-justify-content: center;
-		justify-content: center;
-		background-image: url("../../images/banner.jpg");
-		background-position: center;
-		background-size: cover;
-		background-repeat: no-repeat;
-		border-top: 0;
-		min-height: 100vh;
-		height: 100vh !important;
-		position: relative;
-		text-align: center;
-		overflow: hidden;
-	}
+    #banner {
+        display: -ms-flexbox;
+        -ms-flex-pack: center;
+        -ms-flex-align: center;
+        /* padding: 8em 0 6em 0; */
+        -moz-align-items: center;
+        -webkit-align-items: center;
+        -ms-align-items: center;
+        align-items: center;
+        display: -moz-flex;
+        display: -webkit-flex;
+        display: -ms-flex;
+        display: flex;
+        -moz-justify-content: center;
+        -webkit-justify-content: center;
+        -ms-justify-content: center;
+        justify-content: center;
+        background-image: url("../../images/banner.jpg");
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        border-top: 0;
+        min-height: 100vh;
+        height: 100vh !important;
+        position: relative;
+        text-align: center;
+        overflow: hidden;
+    }
 
     #banner .inner {
         -moz-transform: scale(1.0);
@@ -173,45 +272,45 @@
         font-size: 1.75em;
     }
 
-	@-moz-keyframes more {
-		0% {
-			bottom: -3em;
-		}
+    @-moz-keyframes more {
+        0% {
+            bottom: -3em;
+        }
 
-		100% {
-			bottom: 0;
-		}
-	}
+        100% {
+            bottom: 0;
+        }
+    }
 
-	@-webkit-keyframes more {
-		0% {
-			bottom: -3em;
-		}
+    @-webkit-keyframes more {
+        0% {
+            bottom: -3em;
+        }
 
-		100% {
-			bottom: 0;
-		}
-	}
+        100% {
+            bottom: 0;
+        }
+    }
 
-	@-ms-keyframes more {
-		0% {
-			bottom: -3em;
-		}
+    @-ms-keyframes more {
+        0% {
+            bottom: -3em;
+        }
 
-		100% {
-			bottom: 0;
-		}
-	}
+        100% {
+            bottom: 0;
+        }
+    }
 
-	@keyframes more {
-		0% {
-			bottom: -3em;
-		}
+    @keyframes more {
+        0% {
+            bottom: -3em;
+        }
 
-		100% {
-			bottom: 0;
-		}
-	}
+        100% {
+            bottom: 0;
+        }
+    }
 
     #banner:before {
         -moz-transition: opacity 3s ease;
@@ -253,23 +352,23 @@
             padding: 8em 2em 4em 2em;
         }
 
-            #banner .inner {
-                width: 100%;
-            }
+        #banner .inner {
+            width: 100%;
+        }
 
-            #banner h1 {
-                font-size: 1.75em;
-                margin-bottom: 0.5em;
-                padding-bottom: 0;
-            }
+        #banner h1 {
+            font-size: 1.75em;
+            margin-bottom: 0.5em;
+            padding-bottom: 0;
+        }
 
-            #banner p {
-                font-size: 1.25em;
-            }
+        #banner p {
+            font-size: 1.25em;
+        }
 
-            #banner .button {
-                width: 100%;
-            }
+        #banner .button {
+            width: 100%;
+        }
 
     }
 
@@ -281,18 +380,20 @@
 
     }
     </style>
-	</head>
-	<body>
+</head>
 
-		<!-- Banner -->
-        <section id="banner">
-            <div class="inner">
-                <header>
-                    <h1>Welcome to MealUp</h1>
-                    <p>Thank you for purchasing mealUp<br />get your installation key and install database</p>
-                </header>
-                <a href="{{ url('license/install') }}" class="button big scrolly">Installer</a>
-            </div>
-        </section>
-	</body>
+<body>
+
+    <!-- Banner -->
+    <section id="banner">
+        <div class="inner">
+            <header>
+                <h1>Welcome to Weber</h1>
+                <p>Thank you for purchasing mealUp<br />get your installation key and install database</p>
+            </header>
+            <a href="{{ url('license/install') }}" class="button big scrolly">Installer</a>
+        </div>
+    </section>
+</body>
+
 </html>

@@ -116,7 +116,7 @@
                         Swal.fire({
                             title: 'Your License is deactivated!',
                             icon: 'info',
-                            html: 'to get benifit of mealUp please activate your license<br><br>' +
+                            html: 'to get benifit of Weber please activate your license<br><br>' +
                                 '<a href="' + a +
                                 '" style="background:#3085d6;color:#fff;padding:8px 10px;border-radius:5px;">Activate License</a>',
                             showCloseButton: false,

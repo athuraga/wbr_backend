@@ -62,59 +62,33 @@ window.onload = () => {
                         <h4>{{__('Vehicles Live Location')}}</h4>
                     </div>
                     <div class="card-body">
-                        <!-- <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>{{__('Items name')}}</th>
-                                    <th>{{__('vehicle name')}}</th>
-                                    <th>{{__('Price')}}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($topItems as $topItem)
-                                <tr>
-                                    <th>{{ $loop->iteration }}</th>
-                                    <th>
-                                        <a href="{{ url('admin/menu/'.$topItem->menu_id) }}" class="nav-link active">
-                                            {{ $topItem->itemName }}
-                                        </a>
-                                    </th>
-                                    <th>{{ $topItem->vehicle }}</th>
-                                    <th>{{ $currency }}{{ $topItem->price }}</th>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table> -->
-                        <div class="mT-30">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <div class="row">
-                                        <div class="pac-card col-md-12 mb-3" id="pac-card">
-                                            <label for="pac-input">{{__('Location based on latitude/lontitude')}}<span
-                                                    class="text-danger">&nbsp;*</span></label>
-                                            <div id="pac-container">
-                                                <input id="pac-input" type="text" name="map_address"
-                                                    value="{{ old('map_address') }}" class="form-control"
-                                                    placeholder="Enter A Location" />
-                                                <input type="hidden" name="lat" value="{{57.708870}}" id="lat">
-                                                <input type="hidden" name="lang" value="{{57.708870}}" id="lang">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12 mb-3">
-                                            <label for="min_order_amount">{{__('Enter VIN')}}<span
-                                                    class="text-danger">&nbsp;*</span></label>
-                                            <input type="text" class="form-control" name="address"
-                                                value="{{ old('address') }}"
-                                                placeholder="{{__('Vehicle Identification')}}" id="location">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="row">
+                                    <div class="pac-card col-md-12 mb-3" id="pac-card">
+                                        <label for="pac-input">{{__('Location based on latitude/lontitude')}}<span
+                                                class="text-danger">&nbsp;*</span></label>
+                                        <div id="pac-container">
+                                            <input id="pac-input" type="text" name="map_address"
+                                                value="{{ old('map_address') }}" class="form-control"
+                                                placeholder="Enter A Location" />
+                                            <input type="hidden" name="lat" value="{{57.708870}}" id="lat">
+                                            <input type="hidden" name="lang" value="{{11.974560}}" id="lang">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div id="map"></div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label for="min_order_amount">{{__('Enter VIN')}}<span
+                                                class="text-danger">&nbsp;*</span></label>
+                                        <input type="text" class="form-control" name="address"
+                                            value="{{ old('address') }}" placeholder="{{__('Vehicle Identification')}}"
+                                            id="location">
+                                    </div>
                                 </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="map"></div>
                             </div>
                         </div>
                     </div>

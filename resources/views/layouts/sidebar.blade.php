@@ -68,7 +68,7 @@
             @can('admin_vehicle_access')
             <li class="{{ $activePage == 'vehicle' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('admin/vehicle') }}">
-                    <i class="fas fa-user-secret text-info"></i>
+                    <i class="fas fa-bicycle fa-lg"></i>
                     <span class="nav-link-text">{{__('vehicle')}}</span>
                 </a>
             </li>

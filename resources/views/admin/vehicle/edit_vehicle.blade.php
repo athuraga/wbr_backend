@@ -222,7 +222,7 @@
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="avg_delivery_time">{{__('Avg. Run Time(in min)/Full Charge5')}}<span
+                                <label for="avg_delivery_time">{{__('Avg. Run Time(in min)/Full Charge')}}<span
                                         class="text-danger">&nbsp;*</span></label>
                                 <input type="number" min=1 name="avg_delivery_time"
                                     value="{{ old('avg_delivery_time') }}"
