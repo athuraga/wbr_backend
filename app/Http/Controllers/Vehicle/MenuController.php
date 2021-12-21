@@ -19,9 +19,9 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $vehicle = Vehicle::where('user_id',auth()->user()->id)->first();
-        $vehicle['menu'] = Menu::where('vehicle_id',$vehicle->id)->get();
-        return view('vehicle.menu.menu',compact('vehicle'));
+        $vehicle = Vehicle::where('user_id', auth()->user()->id)->first();
+        $vehicle['menu'] = Menu::where('vehicle_id', $vehicle->id)->get();
+        return view('vehicle.menu.menu', compact('vehicle'));
     }
 
     /**
@@ -51,41 +51,38 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Menu $vehicle_menu,Request $request)
+    public function show(Menu $vehicle_menu, Request $request)
     {
         $menu = $vehicle_menu;
-        if($request->has('filter'))
-        {
+        if ($request->has('filter')) {
             $vehicle = Vehicle::find($request->vehicle_id);
-            $submenu = Submenu::where('vehicle_id',$vehicle->id);
-            $menu['submenu'] = $submenu->where('menu_id',$request->menu_id);
+            $submenu = Submenu::where('vehicle_id', $vehicle->id);
+            $menu['submenu'] = $submenu->where('menu_id', $request->menu_id);
             $value = $request->filter;
-            if($value == 'veg'){
-                $submenu = $submenu->where('type','veg');
+            if ($value == 'scooter') {
+                $submenu = $submenu->where('type', 'scooter');
             }
-            if($value == 'non_veg'){
-                $submenu = $submenu->where('type','non_veg');
+            if ($value == 'bike') {
+                $submenu = $submenu->where('type', 'bike');
             }
-            if($value == 'excel'){
-                $submenu = $submenu->where('is_excel','1');
+            if ($value == 'excel') {
+                $submenu = $submenu->where('is_excel', '1');
             }
-            if($value == 'panel'){
-                $submenu = $submenu->where('is_excel','0');
+            if ($value == 'panel') {
+                $submenu = $submenu->where('is_excel', '0');
             }
-            if($value == 'all'){
+            if ($value == 'all') {
                 $submenu = $submenu;
             }
             $menu['submenu'] = $submenu->get();
-            $view = view('vehicle.submenu.display_submenu',compact('menu'))->render();
-            return response()->json(['html' => $view,'success' => true]);
-        }
-        else
-        {
-            $vehicle = Vehicle::where('user_id',auth()->user()->id)->first();
-            $submenu = Submenu::where('vehicle_id',$vehicle->id);
-            $menu['submenu'] = $submenu->where('menu_id',$menu->id);
+            $view = view('vehicle.submenu.display_submenu', compact('menu'))->render();
+            return response()->json(['html' => $view, 'success' => true]);
+        } else {
+            $vehicle = Vehicle::where('user_id', auth()->user()->id)->first();
+            $submenu = Submenu::where('vehicle_id', $vehicle->id);
+            $menu['submenu'] = $submenu->where('menu_id', $menu->id);
             $menu['submenu'] = $submenu->get();
-            return view('vehicle.submenu.submenu',compact('menu'));
+            return view('vehicle.submenu.submenu', compact('menu'));
         }
     }
 

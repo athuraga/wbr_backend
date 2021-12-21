@@ -291,10 +291,10 @@
                                     <div class="ticket-info">
                                         <div>{{ $topItem->total }}{{' time served'}}</div>
                                         <div class="w-100">
-                                            @if ($topItem->type == 'veg')
-                                                <img src="{{ url('images/veg.png') }}" class="float-right" alt="">
+                                            @if ($topItem->type == 'scooter')
+                                                <img src="{{ url('images/scooter.png') }}" class="float-right" alt="">
                                             @else
-                                                <img src="{{ url('images/non-veg.png') }}" class="float-right" alt="">
+                                                <img src="{{ url('images/non-scooter.png') }}" class="float-right" alt="">
                                             @endif
                                         </div>
                                     </div>

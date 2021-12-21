@@ -88,10 +88,10 @@
                                                             </div>
                                                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-8 orderColRight">
                                                                 <div class="orderContent">
-                                                                    @if ($submenu->type == 'veg')
-                                                                        <img src="{{ url('images/veg.png') }}" class="orderIcon" alt="">
+                                                                    @if ($submenu->type == 'scooter')
+                                                                        <img src="{{ url('images/scooter.png') }}" class="orderIcon" alt="">
                                                                     @else
-                                                                        <img src="{{ url('images/non-veg.png') }}" class="orderIcon" alt="">
+                                                                        <img src="{{ url('images/bike.png') }}" class="orderIcon" alt="">
                                                                     @endif
                                                                     <h5>{{ $submenu->name }}</h5>
                                                                 </div>

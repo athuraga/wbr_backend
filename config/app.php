@@ -164,7 +164,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Craftsys\Msg91\Msg91LaravelServiceProvider::class,
-
+        Cornford\Googlmapper\MapperServiceProvider::class,
         /*
          * Package Service Providers...
          */

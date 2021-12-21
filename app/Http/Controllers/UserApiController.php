@@ -186,22 +186,16 @@ class UserApiController extends Controller
         ]);
         $data = $request->all();
         $id = auth()->user();
-        if(Hash::check($data['old_password'], $id->password) == true)
-        {
-            if($data['password'] == $data['password_confirmation'])
-            {
+        if (Hash::check($data['old_password'], $id->password) == true) {
+            if ($data['password'] == $data['password_confirmation']) {
                 $id->password = Hash::make($data['password']);
                 $id->save();
-                return response(['success' => true , 'data' => 'Password Update Successfully.!']);
+                return response(['success' => true, 'data' => 'Password Update Successfully.!']);
+            } else {
+                return response(['success' => false, 'data' => 'password and confirm password does not match.']);
             }
-            else
-            {
-                return response(['success' => false , 'data' => 'password and confirm password does not match.']);
-            }
-        }
-        else
-        {
-            return response(['success' => false , 'data' => 'Old password does not match.']);
+        } else {
+            return response(['success' => false, 'data' => 'Old password does not match.']);
         }
     }
 
@@ -212,14 +206,11 @@ class UserApiController extends Controller
             'where' => 'bail|required'
         ]);
         $user = User::where('email_id', $request->email_id)->first();
-        if ($user)
-        {
-            if ($request->where == 'register')
-            {
+        if ($user) {
+            if ($request->where == 'register') {
                 $this->sendNotification($user);
             }
-            if($request->where == 'forgot_password')
-            {
+            if ($request->where == 'forgot_password') {
                 $this->ForgotPassword($user);
             }
             $user->makeHidden('otp');
@@ -266,29 +257,25 @@ class UserApiController extends Controller
     public function apiSingleVehicle($vehicle_id)
     {
         $master = array();
-        $master['vehicle'] = Vehicle::where([['id', $vehicle_id], ['status', 1]])->first(['id', 'image', 'tax', 'name', 'map_address', 'for_two_person', 'vehicle_type','lat','lang', 'vehicletype_id'])->makeHidden(['vehicle_logo']);
+        $master['vehicle'] = Vehicle::where([['id', $vehicle_id], ['status', 1]])->first(['id', 'image', 'tax', 'name', 'map_address', 'for_two_person', 'vehicle_type', 'lat', 'lang', 'vehicletype_id'])->makeHidden(['vehicle_logo']);
         if ($master['vehicle']->tax == null) {
             $master['vehicle']->tax = strval(5);
         }
         $menus = Menu::where([['vehicle_id', $vehicle_id], ['status', 1]])->orderBy('id', 'DESC')->get(['id', 'name', 'image']);
         $tax = GeneralSetting::first()->isItemTax;
         foreach ($menus as $menu) {
-            $menu['submenu'] = Submenu::where([['menu_id', $menu->id],['status',1]])->get(['id', 'qty_reset', 'item_reset_value','availabel_item','type', 'name', 'image', 'price']);
-            foreach ($menu['submenu'] as $value) 
-            {
+            $menu['submenu'] = Submenu::where([['menu_id', $menu->id], ['status', 1]])->get(['id', 'qty_reset', 'item_reset_value', 'availabel_item', 'type', 'name', 'image', 'price']);
+            foreach ($menu['submenu'] as $value) {
                 if ($value->qty_reset == 'daily') {
                     $value->availabel_item = $value->availabel_item == null ? $value->item_reset_value : $value->availabel_item;
                 }
-                $value['custimization'] = SubmenuCusomizationType::where('submenu_id', $value->id)->get(['id', 'name', 'custimazation_item', 'type','min_item_selection','max_item_selection']);
-                if ($tax == 0) 
-                {
+                $value['custimization'] = SubmenuCusomizationType::where('submenu_id', $value->id)->get(['id', 'name', 'custimazation_item', 'type', 'min_item_selection', 'max_item_selection']);
+                if ($tax == 0) {
                     $price_tax = GeneralSetting::first()->item_tax;
                     $disc = $value->price * $price_tax;
                     $discount = $disc / 100;
                     $value->price = strval($value->price + $discount);
-                } 
-                else 
-                {
+                } else {
                     $value->price = strval($value->price);
                 }
             }
@@ -372,7 +359,7 @@ class UserApiController extends Controller
     {
         $promo = PromoCode::where('status', 1);
         $v = [];
-        $promo_codes = PromoCode::where([['status', 1],['display_customer_app', 1]])->get();
+        $promo_codes = PromoCode::where([['status', 1], ['display_customer_app', 1]])->get();
         foreach ($promo_codes as $promo_code) {
             $vehicleIds = explode(',', $promo_code->vehicle_id);
             if (($key = array_search($vehicle_id, $vehicleIds)) !== false) {
@@ -506,8 +493,7 @@ class UserApiController extends Controller
             );
             $bookData['payment_token'] = $charge->id;
         }
-        if ($bookData['payment_type'] == 'WALLET')
-        {
+        if ($bookData['payment_type'] == 'WALLET') {
             $user = auth()->user();
             if ($bookData['amount'] > $user->balance) {
                 return response(['success' => false, 'data' => "You have insufficient balance."]);
@@ -530,8 +516,7 @@ class UserApiController extends Controller
             $user->withdraw($bookData['amount'], [$order->id]);
         }
         $bookData['item'] = json_decode($bookData['item'], true);
-        foreach ($bookData['item'] as $child_item) 
-        {
+        foreach ($bookData['item'] as $child_item) {
             $order_child = array();
             $order_child['order_id'] = $order->id;
             $order_child['item'] = $child_item['id'];
@@ -823,14 +808,11 @@ class UserApiController extends Controller
 
         $data = $result->get(['id', 'name', 'image', 'lat', 'lang', 'vehicletype_id', 'vehicle_type'])->makeHidden(['vehicle_logo']);
 
-        if(isset($request->sorting))
-        {
-            if($request->sorting == 'high_to_low')
-            {
+        if (isset($request->sorting)) {
+            if ($request->sorting == 'high_to_low') {
                 $data = $data->sortByDesc('rate')->values()->all();
             }
-            if($request->sorting == 'low_to_high')
-            {
+            if ($request->sorting == 'low_to_high') {
                 $data = $data->sortBy('rate')->values()->all();
             }
         }
@@ -869,9 +851,9 @@ class UserApiController extends Controller
         return response(['success' => true, 'data' => $data]);
     }
 
-    public function apiVegRest(Request $request)
+    public function apiScooterRest(Request $request)
     {
-        $vehicles = Vehicle::where([['vehicle_type', 'veg'], ['status', 1]])->orderBy('id', 'DESC')->get(['id', 'image', 'name', 'lat', 'lang', 'vehicletype_id', 'vehicle_type'])->makeHidden(['vehicle_logo']);
+        $vehicles = Vehicle::where([['vehicle_type', 'scooter'], ['status', 1]])->orderBy('id', 'DESC')->get(['id', 'image', 'name', 'lat', 'lang', 'vehicletype_id', 'vehicle_type'])->makeHidden(['vehicle_logo']);
         foreach ($vehicles as $vehicle) {
             $lat1 = $vehicle->lat;
             $lon1 = $vehicle->lang;
@@ -906,9 +888,9 @@ class UserApiController extends Controller
         return response(['success' => true, 'data' => $vehicles]);
     }
 
-    public function apiNonVegRest(Request $request)
+    public function apiBikeRest(Request $request)
     {
-        $vehicles = Vehicle::where([['vehicle_type', 'non_veg'], ['status', 1]])->orderBy('id', 'DESC')->get(['id', 'image', 'name', 'lat', 'lang', 'vehicletype_id', 'vehicle_type'])->makeHidden(['vehicle_logo']);
+        $vehicles = Vehicle::where([['vehicle_type', 'bike'], ['status', 1]])->orderBy('id', 'DESC')->get(['id', 'image', 'name', 'lat', 'lang', 'vehicletype_id', 'vehicle_type'])->makeHidden(['vehicle_logo']);
         foreach ($vehicles as $vehicle) {
             $lat1 = $vehicle->lat;
             $lon1 = $vehicle->lang;
@@ -1118,8 +1100,7 @@ class UserApiController extends Controller
         $d_image = [];
         if (isset($data['image'])) {
             if (count($data['image']) <= 3) {
-                foreach ($data['image'] as $image) 
-                {
+                foreach ($data['image'] as $image) {
                     $img = $image;
                     $img = str_replace('data:image/png;base64,', '', $img);
                     $img = str_replace(' ', '+', $img);
@@ -1503,12 +1484,11 @@ class UserApiController extends Controller
 
     public function ForgotPassword($user)
     {
-        $verification_content = NotificationTemplate::where('title','verification')->first();
+        $verification_content = NotificationTemplate::where('title', 'verification')->first();
         $otp = mt_rand(1000, 9999);
         $user->otp = $otp;
         $user->save();
-        if ($user->language == 'spanish')
-        {
+        if ($user->language == 'spanish') {
             $msg_content = $verification_content->spanish_notification_content;
             $mail_content = $verification_content->spanish_mail_content;
 
@@ -1525,14 +1505,12 @@ class UserApiController extends Controller
             } catch (\Throwable $th) {
                 //throw $th;
             }
-        }
-        else
-        {
+        } else {
             $mail_content = $verification_content->mail_content;
             $detail['otp'] = $otp;
             $detail['user_name'] = $user->name;
             $detail['app_name'] = GeneralSetting::first()->business_name;
-            $data = ["{otp}", "{user_name}","{app_name}"];
+            $data = ["{otp}", "{user_name}", "{app_name}"];
             $message1 = str_replace($data, $detail, $mail_content);
             try {
                 Mail::to($user->email_id)->send(new Verification($message1));
