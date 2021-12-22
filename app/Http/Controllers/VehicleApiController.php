@@ -1195,6 +1195,16 @@ class VehicleApiController extends Controller
         return response(['success' => true , 'data' => $faqs]);
     }
 
+    public function apiLiveLocation()
+    {
+        //$livelocation = Livelocation::where('vehicle')->get();
+        $vehLocations = Vehicle::get(['id', 'image', 'name', 'lat', 'lang', 'vehicletype_id', 'vehicle_type', 'license_number'])->makeHidden(['vehicle_logo']);
+            foreach ($vehLocations as $vehLocation) {
+                $vehLocation['lat'] = $vehicle->lat;
+                $vehLocations['lon'] = $vehicle->lang;
+            }
+        return response(['success' => true , 'data' => $livelocation]);
+    }
     public function apiInsights()
     {
         $vehicle = Vehicle::where('user_id',auth()->user()->id)->first();

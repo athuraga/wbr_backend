@@ -106,6 +106,7 @@ Route::middleware('auth:api')->prefix('vehicle')->group(function () {
 
     // Faq
     Route::get('faq', 'VehicleApiController@apiFaq');
+    Route::get('livelocation', 'VehicleApiController@apiLivelocation');
 
     Route::get('vehicle_login', 'VehicleApiController@apiVehicleLogin');
     Route::post('update_profile', 'VehicleApiController@apiUpdateProfile');

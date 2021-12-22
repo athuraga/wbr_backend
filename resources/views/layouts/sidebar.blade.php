@@ -126,11 +126,11 @@
                 @endif
             @endcan
 
-            @can('map')
-                <li class="{{ $activePage == 'map' ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ url('admin/map') }}">
+            @can('livelocation')
+                <li class="{{ $activePage == 'livelocation' ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ url('admin/livelocation') }}">
                         <i class="fas fa-tags text-info"></i>
-                        <span class="nav-link-text">{{ __('Map') }}</span>
+                        <span class="nav-link-text">{{ __('Livelocation') }}</span>
                     </a>
                 </li>
             @endcan

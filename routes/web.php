@@ -100,6 +100,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function ()
         'language' => Admin\LanguageController::class,
         'refund' => Admin\RefaundController::class,
         'tax' => Admin\TaxController::class,
+        'livelocation' => Admin\LivelocationController::class,
+
     ]);
 
     Route::get('user_bank_details/{id}',[RefaundController::class,'user_bank_details']);

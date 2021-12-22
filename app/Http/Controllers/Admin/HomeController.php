@@ -222,4 +222,22 @@ class HomeController extends Controller
         }
         return ['currentMonth' => $currentMonthAvarageTime , 'lastMonth' => $currentMonthAvarageTime , 'label' => $label];
     }
+
+    /**
+         * Store a newly created resource in storage.
+         *
+         * @param  \Illuminate\Http\Request  $request
+         * @return \Illuminate\Http\Response
+         */
+        public function getVehLocations(Request $request)
+        {
+            return Vehicle::get();
+            $vehLocations = Vehicle::get(['id', 'image', 'name', 'lat', 'lang', 'vehicletype_id', 'vehicle_type', 'license_number'])->makeHidden(['vehicle_logo']);
+            foreach ($vehLocations as $vehLocation) {
+                $vehLocation['lat'] = $vehicle->lat;
+                $vehLocations['lon'] = $vehicle->lang;
+            }
+            return view('admin.home',['vehLocations' => $vehLocations]);
+
+        }
 }
