@@ -7,21 +7,21 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
 
     @php
-    $title = App\Models\GeneralSetting::find(1)->business_name;
-    $favicon = App\Models\GeneralSetting::find(1)->favicon;
+        $title = App\Models\GeneralSetting::find(1)->business_name;
+        $favicon = App\Models\GeneralSetting::find(1)->favicon;
     @endphp
 
     <title>{{ $title }} | @yield('title')</title>
 
-    <link rel="icon" href="{{ url('images/upload/'.$favicon) }}" type="image/png">
+    <link rel="icon" href="{{ url('images/upload/' . $favicon) }}" type="image/png">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- General CSS Files -->
-    <input type="hidden" id="mainurl" value="{{url('/')}}">
+    <input type="hidden" id="mainurl" value="{{ url('/') }}">
 
-    <script src="https://code.jquery.com/jquery-3.5.1.js"
-        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
 
     <script src="https://cdn.rawgit.com/leafo/sticky-kit/v1.1.2/jquery.sticky-kit.min.js"></script>
 
@@ -50,15 +50,16 @@
     <link href="https://jvectormap.com/css/jquery-jvectormap-2.0.3.css" rel="stylesheet">
 
     @php
-    $color = App\Models\GeneralSetting::find(1)->site_color;
+        $color = App\Models\GeneralSetting::find(1)->site_color;
     @endphp
     <style>
-    :root {
-        --site_color: <?php echo $color;
-        ?>;
-        --hover_color: <?php echo $color.'c7';
-        ?>;
-    }
+        :root {
+            --site_color: <?php echo $color;
+?>;
+            --hover_color: <?php echo $color . 'c7';
+?>;
+        }
+
     </style>
 
     <!-- Template CSS -->
@@ -86,7 +87,7 @@
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
     @if (session('direction') == 'rtl')
-    <link rel="stylesheet" href="{{ url('css/rtl_direction.css')}}" type="text/css">
+        <link rel="stylesheet" href="{{ url('css/rtl_direction.css') }}" type="text/css">
     @endif
     <script src="{{ asset('js/iziToast.min.js') }}"></script>
 </head>
@@ -105,32 +106,32 @@
             <div class="main-content">
 
                 @if (App\Models\GeneralSetting::find(1)->license_verify == 1)
-                @yield('content')
-                @yield('setting')
+                    @yield('content')
+                    @yield('setting')
                 @else
-                <script>
-                var a = $('#mainurl').val() + '/admin/license_setting';
-                if (window.location.origin + window.location.pathname != $('#mainurl').val() +
-                    '/admin/license_setting') {
-                    setTimeout(() => {
-                        Swal.fire({
-                            title: 'Your License is deactivated!',
-                            icon: 'info',
-                            html: 'to get benifit of Weber please activate your license<br><br>' +
-                                '<a href="' + a +
-                                '" style="background:#3085d6;color:#fff;padding:8px 10px;border-radius:5px;">Activate License</a>',
-                            showCloseButton: false,
-                            showCancelButton: false,
-                            showConfirmButton: false,
-                            focusConfirm: false,
-                            onClose: () => {
-                                window.location.replace(a);
-                            }
-                        })
-                    }, 500);
-                }
-                </script>
-                @yield('setting')
+                    <script>
+                        var a = $('#mainurl').val() + '/admin/license_setting';
+                        if (window.location.origin + window.location.pathname != $('#mainurl').val() +
+                            '/admin/license_setting') {
+                            setTimeout(() => {
+                                Swal.fire({
+                                    title: 'Your License is deactivated!',
+                                    icon: 'info',
+                                    html: 'to get benifit of Weber please activate your license<br><br>' +
+                                        '<a href="' + a +
+                                        '" style="background:#3085d6;color:#fff;padding:8px 10px;border-radius:5px;">Activate License</a>',
+                                    showCloseButton: false,
+                                    showCancelButton: false,
+                                    showConfirmButton: false,
+                                    focusConfirm: false,
+                                    onClose: () => {
+                                        window.location.replace(a);
+                                    }
+                                })
+                            }, 500);
+                        }
+                    </script>
+                    @yield('setting')
                 @endif
             </div>
         </div>
@@ -173,34 +174,30 @@
     <script src="{{ asset('js/scripts.js') }}"></script>
 
     @if (Request::is('admin/make_payment'))
-    <script src="{{ asset('js/payment.js') }}"></script>
-    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-    <script
-        src="https://www.paypal.com/sdk/js?client-id={{ App\Models\PaymentSetting::first()->paypal_sendbox }}&currency={{ App\Models\GeneralSetting::first()->currency }}"
-        data-namespace="paypal_sdk"></script>
+        <script src="{{ asset('js/payment.js') }}"></script>
+        <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+        <script src="https://www.paypal.com/sdk/js?client-id={{ App\Models\PaymentSetting::first()->paypal_sendbox }}&currency={{ App\Models\GeneralSetting::first()->currency }}"
+                data-namespace="paypal_sdk"></script>
     @endif
 
     @if (Request::is('admin/driver_make_payment'))
-    <script src="{{ asset('js/driver_payment.js') }}"></script>
-    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-    <script
-        src="https://www.paypal.com/sdk/js?client-id={{ App\Models\PaymentSetting::first()->paypal_sendbox }}&currency={{ App\Models\GeneralSetting::first()->currency }}"
-        data-namespace="paypal_sdk"></script>
+        <script src="{{ asset('js/driver_payment.js') }}"></script>
+        <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+        <script src="https://www.paypal.com/sdk/js?client-id={{ App\Models\PaymentSetting::first()->paypal_sendbox }}&currency={{ App\Models\GeneralSetting::first()->currency }}"
+                data-namespace="paypal_sdk"></script>
     @endif
 
     @if (Request::is('admin/delivery_zone_area/*') || Request::is('vehicle/deliveryZoneArea/*'))
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key={{ App\Models\GeneralSetting::first()->map_key }}&callback=initMap&libraries=places&v=weekly"
-        defer></script>
-    <script src="{{ asset('js/delivery_person_map.js') }}"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ App\Models\GeneralSetting::first()->map_key }}&callback=initMap&libraries=places&v=weekly"
+                defer></script>
+        <script src="{{ asset('js/delivery_person_map.js') }}"></script>
     @endif
     @if (Request::is('admin/delivery_zone_area/*') || Request::is('vehicle/deliveryZoneArea/*'))
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key={{ App\Models\GeneralSetting::first()->map_key }}&callback=initMap&libraries=places&v=weekly"
-        defer></script>
-    <script src="{{ asset('js/delivery_person_map.js') }}"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ App\Models\GeneralSetting::first()->map_key }}&callback=initMap&libraries=places&v=weekly"
+                defer></script>
+        <script src="{{ asset('js/delivery_person_map.js') }}"></script>
     @endif
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
@@ -222,6 +219,7 @@
     <script src="{{ asset('js/forms-advanced-forms.js') }}"></script>
 
     <script src="{{ asset('js/custom.js') }}"></script>
+
 </body>
 
 </html>
