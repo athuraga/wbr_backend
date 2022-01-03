@@ -219,6 +219,7 @@
     <script src="{{ asset('js/forms-advanced-forms.js') }}"></script>
 
     <script src="{{ asset('js/custom.js') }}"></script>
+    {{-- <script src="{{ asset('js/livloc.js') }}"></script> --}}
 
 </body>
 

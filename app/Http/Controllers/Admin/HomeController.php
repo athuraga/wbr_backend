@@ -46,6 +46,8 @@ class HomeController extends Controller
         $total_orders = Order::count();
         $menus = Menu::count();
         $topItems = OrderChild::groupBy('item')->select('item', DB::raw('count(*) as total'))->orderBy('total','DESC')->get()->each->setAppends(['itemName']);
+        $vehicles = Vehicle::orderBy('id','DESC')->get();
+
         foreach ($topItems as $item)
         {
             $item['type'] = Submenu::find($item->item)->type;
@@ -53,7 +55,7 @@ class HomeController extends Controller
             $item['menu_id'] = Submenu::find($item->item)->menu_id;
             $item['vehicle'] = Vehicle::find(Submenu::find($item->item)->vehicle_id)->name;
         }
-        return view('admin.home',compact('today_orders','menus','topItems','total_earnings','total_orders','today_earnings','currency','menus'));
+        return view('admin.home',compact('today_orders','menus','topItems','total_earnings','total_orders','today_earnings','currency','menus','vehicles'));
     }
 
     public function topItems()
@@ -237,7 +239,9 @@ class HomeController extends Controller
                 $vehLocation['lat'] = $vehicle->lat;
                 $vehLocations['lon'] = $vehicle->lang;
             }
-            return view('admin.home',['vehLocations' => $vehLocations]);
-
+            // return view('admin.home',['vehLocations' => $vehLocations]);
+            $vehicleslocation = $vehLocations;
+            return response()->json(['success' => true , 'data' => $vehicleslocation]);
         }
+
 }

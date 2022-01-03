@@ -1,6 +1,6 @@
 var map;
-var speaker_markers = new Array();
-var speaker_pins = new Array();
+var vehicle_markers = new Array();
+var vehicle_pins = new Array();
 var infowindow;
 var mapScheme;
 
@@ -53,22 +53,22 @@ function loadMarkers(map) {
     infowindow.close();
 
     // clear any current markers
-    speaker_pins.forEach(function(marker) {
+    vehicle_pins.forEach(function(marker) {
         marker.setMap(null);
     });
-    speaker_pins = [];
-    speaker_markers = [];
+    vehicle_pins = [];
+    vehicle_markers = [];
 
     axios.get('{{ $specific ? route('
-            map.getSpecificSpeaker ', $specific) : route('
-            map.getSpeakers ') }}')
+            map.getSpecificVehicle ', $specific) : route('
+            map.getVehicles ') }}')
         .then(function(response) {
 
-            response.data.forEach(function(speaker, index) {
-                addSpeakerMarker(speaker, infowindow, index);
+            response.data.forEach(function(vehicle, index) {
+                addVehicleMarker(vehicle, infowindow, index);
             });
 
-            updateSpeakerCount(response.data.length);
+            updateVehicleCount(response.data.length);
         })
         .catch(function(response) {
             console.log(response);
@@ -76,7 +76,7 @@ function loadMarkers(map) {
 
 }
 
-function updateSpeakerCount(count) {
+function updateVehicleCount(count) {
     document.getElementById('spkCount').textContent = count;
     $('#spkCount').addClass('spkCountChanged');
     setTimeout(function() {
@@ -84,47 +84,47 @@ function updateSpeakerCount(count) {
     }, 3000);
 }
 
-function addSpeakerMarker(speaker, infowindow, index) {
+function addVehicleMarker(vehicle, infowindow, index) {
     var dodge = new Array(
         [0, 0], [+0.006, -0.01], [-0.006, +0.01], [-0.006, -0.01], [+0.006, +0.01], [+0.006, 0], [+0, +0.01], [+0, -0.01], [-0.006, 0]
     );
 
     region = document.getElementById('region').value
 
-    if (region == '' || speaker.regioncode == region) {
-        icon = '/images/SpeakernetSymbol_32x32_native.png'
+    if (region == '' || vehicle.regioncode == region) {
+        icon = '/images/VehiclenetSymbol_32x32_native.png'
 
     } else {
-        icon = '/images/SpeakernetSymbol_32x32_native_red.png'
+        icon = '/images/VehiclenetSymbol_32x32_native_red.png'
     }
 
     var pin = new google.maps.Marker({
         position: {
-            lat: parseFloat(speaker.latitude) + parseFloat(dodge[index % 9][0]),
-            lng: parseFloat(speaker.longitude) + parseFloat(dodge[index % 9][1])
+            lat: parseFloat(vehicle.latitude) + parseFloat(dodge[index % 9][0]),
+            lng: parseFloat(vehicle.longitude) + parseFloat(dodge[index % 9][1])
         },
         map: map,
         icon: icon
     });
 
-    speaker_markers.push(speaker);
-    speaker_pins.push(pin);
+    vehicle_markers.push(vehicle);
+    vehicle_pins.push(pin);
 
     google.maps.event.addListener(pin, 'click', function(ev) {
         infowindow.setPosition(ev.latLng);
         infowindow.open(map);
-        infowindow.setContent(speaker.speaker.replace(/\b\w/g, function(l) {
+        infowindow.setContent(vehicle.vehicle.replace(/\b\w/g, function(l) {
             return l.toUpperCase()
         }));
-        fillCard(speaker, map, infowindow);
+        fillCard(vehicle, map, infowindow);
     }, {
         passive: true
     });
 
 }
 
-function fillCard(speaker, map, infowindow) {
-    url = '/map/speaker/' + speaker.id + '?lat=' + map.getCenter().lat() + '&lng=' + map.getCenter().lng() + '&z=' +
+function fillCard(vehicle, map, infowindow) {
+    url = '/map/vehicle/' + vehicle.id + '?lat=' + map.getCenter().lat() + '&lng=' + map.getCenter().lng() + '&z=' +
         map.getZoom();
 
     axios.get(url)

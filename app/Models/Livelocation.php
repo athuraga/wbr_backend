@@ -9,4 +9,5 @@ class Livelocation extends Model
 {
     use HasFactory;
 
+
 }

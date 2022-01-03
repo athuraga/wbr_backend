@@ -162,6 +162,17 @@
                     </a>
                 </li>
             <?php endif; ?>
+
+
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('faq_access')): ?>
+                <li class="<?php echo e($activePage == 'faq' ? 'active' : ''); ?>">
+                    <a class="nav-link" href="<?php echo e(url('admin/livelocation')); ?>">
+                        <i class="far fa-map text-primary"></i>
+                        <span class="nav-link-text"><?php echo e(__('Livelocation')); ?></span>
+                    </a>
+                </li>
+            <?php endif; ?>
+
             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('admin_reports')): ?>
                 <li
                     class="dropdown <?php echo e($activePage == 'notification_template' ? 'active' : ''); ?> || <?php echo e($activePage == 'send_notification' ? 'active' : ''); ?>">
@@ -247,7 +258,8 @@
                         <li class="<?php echo e($activePage == 'vehicle_report' ? 'active' : ''); ?>"><a
                                 href="<?php echo e(url('admin/vehicle_report')); ?>"><?php echo e(__('Vehicle reports')); ?></a></li>
                         <li class="<?php echo e($activePage == 'driver_report' ? 'active' : ''); ?>"><a
-                                href="<?php echo e(url('admin/driver_report')); ?>"><?php echo e(__('Delivery persons reports')); ?></a></li>
+                                href="<?php echo e(url('admin/driver_report')); ?>"><?php echo e(__('Delivery persons reports')); ?></a>
+                        </li>
                     </ul>
                 </li>
             <?php endif; ?>

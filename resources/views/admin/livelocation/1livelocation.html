@@ -5,19 +5,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <meta name="description" content="Wbr is a public wbr-finder service, full of speakers willing to give free / paid talks to groups such as Rotary, Lions, WI and U3A">
-    <meta name="author" content="Wbr Ltd">
-    <meta name="google-site-verification" content="uvfZabSXiuz1K6EMZCzRwNIawxGgP5S9_bzqwYsZj7A" />
-    <link rel="icon" href="../../favicon.ico">
-    <title>Wbr - mapping interesting speakers</title>
-
-    <!-- OG: stuff -->
-    <meta property="og:title" content="Wbr" />
-    <meta property="og:image" content="https://wbr.co.uk/images/ogcover.png" />
-    <meta property="og:description" content="Wbr is a public wbr-finder service, full of speakers willing to give free or paid talks to groups such as Rotary, Lions, WI and U3A" />
-    <meta property="og:url" content="https://wbr.co.uk/map" />
-
     <!-- Bootstrap core CSS -->
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!--Font Awesome -->
@@ -35,21 +22,6 @@
     <link href="/css/app.css?0002" rel="stylesheet">
     <link href="/css/buttons.css?0002" rel="stylesheet">
 
-    <!-- favicon -->
-    <link rel="apple-touch-icon" sizes="57x57" href="/fav/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/fav/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/fav/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/fav/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/fav/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/fav/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/fav/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/fav/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/fav/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/fav/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/fav/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/fav/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/fav/favicon-16x16.png">
-    <link rel="manifest" href="/fav/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/fav/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
@@ -82,14 +54,6 @@
 
             </div>
 
-            <div id="navbar" class="navbar-collapse collapse">
-
-                <ul class="nav navbar-right nav-pills speakernav">
-                    <li><a href="/talks">Browse Talks</a></li>
-                    <li><a href="/map" class="active">Map Talks</a></li>
-                </ul>
-            </div>
-            <!--/.nav-collapse -->
         </div>
     </nav>
 
@@ -133,7 +97,7 @@
                                     Entertainment</option>
                                 <option value='4'>
                                     Health</option>
-                                <option value='1'>
+                                <!-- <option value='1'>
                                     History</option>
                                 <option value='8'>
                                     Hobbies</option>
@@ -152,12 +116,12 @@
                                 <option value='9'>
                                     Travel</option>
                                 <option value='0'>
-                                    Uncategorised</option>
+                                    Uncategorised</option> -->
                             </select>
                         </div>
                     </div>
 
-
+                    <!--
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="fee">Fees</label>
                         <div class="col-sm-8">
@@ -173,7 +137,7 @@
                                     Unknown</option>
                             </select>
                         </div>
-                    </div>
+                    </div> -->
 
 
                     <div class="form-group">
@@ -275,77 +239,8 @@
                         </div>
                     </div>
 
-
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label" for="recency">Updated</label>
-                        <div class="col-sm-8">
-                            <select class="form-control input-sm" id="recency" name="recency">
-                                <option value="">Anytime</option>
-                                <option value="30">Last 30 days</option>
-                                <option value="180">Last 6 months</option>
-                                <option value="365">Last 12 months</option>
-                            </select>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label" for="notice">Notice</label>
-                        <div class="col-sm-8">
-                            <select class="form-control input-sm" id="notice" name="notice">
-                                <option value="">Regular</option>
-                                <option value="Short">Short (&lt; 1 month)</option>
-                                <option value="Emergency">Emergency (&lt;1 week)</option>
-                            </select>
-                        </div>
-                    </div>
-
-
-                    <!-- <div class="form-group">
-                        <label class="col-sm-4 control-label" for="notice">Online</label>
-                        <div class="col-sm-8">
-                            <select class="form-control input-sm" id="online" name="online">
-                                <option value="">Any</option>
-                                <option value='3'>
-                                    Yes, group must organise</option>
-                                <option value='4'>
-                                    Yes, wbr facilitated</option>
-                            </select>
-                        </div>
-                    </div> -->
                 </form>
 
-                <br />
-                <br />
-                <h3>Email me</h3>
-                <p>Send me talks matching this search to my inbox every month</p>
-                <form action="/mailout" method="post">
-                    <div class="form-group">
-                        <input type="email" class="span12 form-control" disabled="disabled" placeholder="Subscriptions coming soon">
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <button type="submit" class="btn btn-primary pull-right ">Email me talks</button>
-                        </div>
-                    </div>
-                    <!--
-                </form>
-                <br />
-                <h3>Pot Luck Tags</h3>
-                <p>A random selection of tags</p>
-                <a href="https://wbr.co.uk/tagged/bees-beekeeping">Bees Beekeeping</a> | <a href="https://wbr.co.uk/tagged/cyprus">Cyprus</a> | <a href="https://wbr.co.uk/tagged/winter">Winter</a> | <a href="https://wbr.co.uk/tagged/world-wildlife">World Wildlife</a>                | <a href="https://wbr.co.uk/tagged/bounty">Bounty</a> | <a href="https://wbr.co.uk/tagged/funny-poems">| Funny Poems</a> | <a href="https://wbr.co.uk/tagged/travel">Travel</a> | <a href="https://wbr.co.uk/tagged/triathlon">Triathlon</a>                | <a href="https://wbr.co.uk/tagged/social-reformers">Social Reformers</a> | <a href="https://wbr.co.uk/tagged/inclusion">Inclusion</a> | <a href="https://wbr.co.uk/tagged/your-purpose">Your Purpose</a> | <a href="https://wbr.co.uk/tagged/vietnam-war">Vietnam War</a>                | <a href="https://wbr.co.uk/tagged/kolmanskoppe-ghost-town">Kolmanskoppe Ghost Town</a> | <a href="https://wbr.co.uk/tagged/environmental">Environmental</a> | <a href="https://wbr.co.uk/tagged/carthage">Carthage</a>                | <a href="https://wbr.co.uk/tagged/harley-davidson">Harley Davidson</a> | <a href="https://wbr.co.uk/tagged/giantveg">Giantveg</a> | <a href="https://wbr.co.uk/tagged/bees">Bees</a> | <a href="https://wbr.co.uk/tagged/potholing">Potholing</a>                | <a href="https://wbr.co.uk/tagged/byzantine">Byzantine</a> | <a href="https://wbr.co.uk/tagged/writer">Writer</a> | <a href="https://wbr.co.uk/tagged/celebrating">Celebrating</a> | <a href="https://wbr.co.uk/tagged/gender">Gender</a>                | <a href="https://wbr.co.uk/tagged/marketing">Marketing</a> | <a href="https://wbr.co.uk/tagged/water-colour">Water Colour</a>
-                <h4><a href="https://wbr.co.uk/tagged">List of all tags <i class="fa fa-tag"> </i></a></h4>
-                <p>&nbsp;</p>
-
-                <div>
-                    <h2>Search database</h2>
-                    <form class="form" action="https://wbr.co.uk/search" method="get" name="combinedsearch" id="combinedsearch">
-                        <input type="text" class="form-control" placeholder="search term" name="q" id="q" />
-                        <button class="btn btn-default col-md-6" style="margin:8px 8px 0 0;" name="speakers" type="submit">Speakers</button>
-                        <button class="btn btn-default col-md-5" style="margin:8px 0 0 8px;" name="talks" type="submit">Talks</button>
-                    </form>
-                </div> -->
             </div>
         </div>
 
@@ -482,15 +377,22 @@
             return map;
         }
 
-        function recenter(map) {
-            axios.get('https://wbr.co.uk/map/recenter')
-                .then(function(response) {
-                    map.panTo({
-                        lat: parseFloat(response.data.lat),
-                        lng: parseFloat(response.data.lng)
-                    });
-                    map.setZoom(parseInt(response.data.z));
+        function livloc() {
+
+            var locations = <?php print_r(json_encode($vehicles)); ?>;
+
+            var mymap = new GMaps({
+                el: '#mymap',
+                lat: 57.708870,
+                lng: 11.974560,
+                zoom: 6
+            });
+            $.each(locations, function(index, value) {
+                mymap.addMarker({
+                    lat: value.lat,
+                    lon: value.lon,
                 });
+            });
         }
 
         function loadMarkers(map) {

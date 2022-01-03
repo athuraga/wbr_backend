@@ -2432,6 +2432,24 @@ function update_vehicletype(id) {
     });
 }
 
+function update_vehiclelocation(id) {
+    $.ajax({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        type: "GET",
+
+        url: base_url + "/admin/livelocation/",
+        success: function(result) {
+            console.log("result", result);
+            if (result.success == true) {}
+        },
+        error: function(err) {
+            console.log("err ", err);
+        },
+    });
+}
+
 function update_banner(id) {
     $.ajax({
         headers: {

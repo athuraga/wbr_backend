@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\DeliveryPersonController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VehicleController;
+use App\Http\Controllers\Admin\LivelocationController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\SubMenuController;
 use App\Http\Controllers\Admin\VehicleDiscountController;
@@ -53,6 +54,9 @@ Route::get('/clear-cache', function() {
 });
 
 Auth::routes();
+Route::get('/', function () {
+    return view('app');
+});
 
 Route::get('/', [AdminController::class, 'showLogin']);
 Route::get('/import', [AdminController::class, 'import'])->name('import');
@@ -86,7 +90,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function ()
         'promo_code' => Admin\PromoCodeController::class,
         'vehicle' => Admin\VehicleController::class,
         'map' => Admin\MapController::class,
-
+        'gmaps' => Admin\LivelocationController::class,
         'vehicletype' => Admin\VehicletypeController::class,
         'banner' => Admin\BannerController::class,
         'roles' => Admin\RoleController::class,

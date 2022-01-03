@@ -28,6 +28,7 @@ Route::post('user_login', 'UserApiController@apiUserLogin');
 Route::post('user_register', 'UserApiController@apiUserRegister');
 Route::post('check_otp', 'UserApiController@apiCheckOtp');
 Route::get('vehicle/vehicle_setting', 'VehicleApiController@apiVehicleSetting');
+Route::get('vehiclesloc', 'VehicleslocController@index');
 
 Route::middleware('auth:api')->prefix('vehicle')->group(function () {
     /* ---- Vehicle ---- */
@@ -106,7 +107,7 @@ Route::middleware('auth:api')->prefix('vehicle')->group(function () {
 
     // Faq
     Route::get('faq', 'VehicleApiController@apiFaq');
-    Route::get('livelocation', 'VehicleApiController@apiLivelocation');
+    Route::get('livelocations', 'VehicleApiController@apiLivelocation');
 
     Route::get('vehicle_login', 'VehicleApiController@apiVehicleLogin');
     Route::post('update_profile', 'VehicleApiController@apiUpdateProfile');
@@ -152,6 +153,7 @@ Route::post('search', 'UserApiController@apiSearch');
 Route::post('near_by', 'UserApiController@apiNearBy');
 Route::get('menu_category/{vehicle_id}', 'UserApiController@apiMenuCategory');
 Route::get('vehicletype', 'UserApiController@apiVehicletype');
+
 Route::post('vehicle', 'UserApiController@apiVehicle');
 Route::get('single_vehicle/{vehicle_id}', 'UserApiController@apiSingleVehicle');
 Route::get('menu/{vehicle_id}', 'UserApiController@apiMenu');

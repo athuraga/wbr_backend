@@ -6,6 +6,7 @@
  * @link https://farbelous.github.io/bootstrap-colorpicker/
  * @link https://github.com/farbelous/bootstrap-colorpicker.git
  */
+
 .colorpicker-saturation {
     width: 100px;
     height: 100px;
@@ -34,7 +35,8 @@
     border-radius: 5px
 }
 
-.colorpicker-alpha,.colorpicker-hue {
+.colorpicker-alpha,
+.colorpicker-hue {
     width: 15px;
     height: 100px;
     float: left;
@@ -43,7 +45,8 @@
     margin-bottom: 4px
 }
 
-.colorpicker-alpha .colorpicker-guide,.colorpicker-hue .colorpicker-guide {
+.colorpicker-alpha .colorpicker-guide,
+.colorpicker-hue .colorpicker-guide {
     display: block;
     height: 1px;
     background: #000;
@@ -64,7 +67,9 @@
     display: none
 }
 
-.colorpicker-alpha,.colorpicker-hue,.colorpicker-saturation {
+.colorpicker-alpha,
+.colorpicker-hue,
+.colorpicker-saturation {
     background-size: contain
 }
 
@@ -80,9 +85,9 @@
     list-style: none;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid rgba(0,0,0,.15);
-    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
-    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    border: 1px solid rgba(0, 0, 0, .15);
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
     padding: 4px;
     min-width: 130px;
     margin-top: 1px;
@@ -90,7 +95,8 @@
     z-index: 1055
 }
 
-.colorpicker:after,.colorpicker:before {
+.colorpicker:after,
+.colorpicker:before {
     display: table;
     content: "";
     line-height: 0
@@ -106,7 +112,7 @@
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
     border-bottom: 7px solid #ccc;
-    border-bottom-color: rgba(0,0,0,.2);
+    border-bottom-color: rgba(0, 0, 0, .2);
     position: absolute;
     top: -7px;
     left: 6px
@@ -151,7 +157,8 @@
     width: 100px
 }
 
-.colorpicker-element .add-on i,.colorpicker-element .input-group-addon i {
+.colorpicker-element .add-on i,
+.colorpicker-element .input-group-addon i {
     display: inline-block;
     cursor: pointer;
     height: 16px;
@@ -181,7 +188,8 @@
     width: 100px
 }
 
-.colorpicker.colorpicker-horizontal .colorpicker-alpha,.colorpicker.colorpicker-horizontal .colorpicker-hue {
+.colorpicker.colorpicker-horizontal .colorpicker-alpha,
+.colorpicker.colorpicker-horizontal .colorpicker-hue {
     width: 100px;
     height: 15px;
     float: left;
@@ -190,7 +198,8 @@
     margin-bottom: 4px
 }
 
-.colorpicker.colorpicker-horizontal .colorpicker-alpha .colorpicker-guide,.colorpicker.colorpicker-horizontal .colorpicker-hue .colorpicker-guide {
+.colorpicker.colorpicker-horizontal .colorpicker-alpha .colorpicker-guide,
+.colorpicker.colorpicker-horizontal .colorpicker-hue .colorpicker-guide {
     display: block;
     height: 15px;
     background: #fff;
@@ -230,11 +239,19 @@
     border-left: 0
 }
 
-.colorpicker-alpha.colorpicker-visible,.colorpicker-bar.colorpicker-visible,.colorpicker-hue.colorpicker-visible,.colorpicker-saturation.colorpicker-visible,.colorpicker.colorpicker-visible {
+.colorpicker-alpha.colorpicker-visible,
+.colorpicker-bar.colorpicker-visible,
+.colorpicker-hue.colorpicker-visible,
+.colorpicker-saturation.colorpicker-visible,
+.colorpicker.colorpicker-visible {
     display: block
 }
 
-.colorpicker-alpha.colorpicker-hidden,.colorpicker-bar.colorpicker-hidden,.colorpicker-hue.colorpicker-hidden,.colorpicker-saturation.colorpicker-hidden,.colorpicker.colorpicker-hidden {
+.colorpicker-alpha.colorpicker-hidden,
+.colorpicker-bar.colorpicker-hidden,
+.colorpicker-hue.colorpicker-hidden,
+.colorpicker-saturation.colorpicker-hidden,
+.colorpicker.colorpicker-hidden {
     display: none
 }
 
@@ -263,5 +280,3 @@
 .colorpicker-swatch+.colorpicker-swatch {
     margin-left: 2px
 }
-
-/*# sourceMappingURL=bootstrap-colorpicker.min.css.map */

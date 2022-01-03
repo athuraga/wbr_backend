@@ -162,6 +162,17 @@
                     </a>
                 </li>
             @endcan
+
+
+            @can('faq_access')
+                <li class="{{ $activePage == 'faq' ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ url('admin/livelocation') }}">
+                        <i class="far fa-map text-primary"></i>
+                        <span class="nav-link-text">{{ __('Livelocation') }}</span>
+                    </a>
+                </li>
+            @endcan
+
             @can('admin_reports')
                 <li
                     class="dropdown {{ $activePage == 'notification_template' ? 'active' : '' }} || {{ $activePage == 'send_notification' ? 'active' : '' }}">
@@ -247,7 +258,8 @@
                         <li class="{{ $activePage == 'vehicle_report' ? 'active' : '' }}"><a
                                 href="{{ url('admin/vehicle_report') }}">{{ __('Vehicle reports') }}</a></li>
                         <li class="{{ $activePage == 'driver_report' ? 'active' : '' }}"><a
-                                href="{{ url('admin/driver_report') }}">{{ __('Delivery persons reports') }}</a></li>
+                                href="{{ url('admin/driver_report') }}">{{ __('Delivery persons reports') }}</a>
+                        </li>
                     </ul>
                 </li>
             @endcan

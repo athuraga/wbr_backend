@@ -2300,7 +2300,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `image`, `email_id`, `email_verified_at`, `device_token`, `password`, `phone`, `phone_code`, `is_verified`, `status`, `otp`, `faviroute`, `remember_token`, `vehicle_id`, `language`, `ifsc_code`, `account_name`, `account_number`, `micr_code`, `provider_type`, `provider_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'noimage.png', 'admin-mealUp@gmail.com', NULL, NULL, '$2y$10$QY7BCiafK3hoHiFWL/2RM.JCwlBpVpDzZLmkIRLNj5cosDMyZtawC', NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 'admin', 'noimage.png', 'contact@webermobility.tech', NULL, NULL, '$2y$10$QY7BCiafK3hoHiFWL/2RM.JCwlBpVpDzZLmkIRLNj5cosDMyZtawC', NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 

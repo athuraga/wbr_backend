@@ -32,23 +32,14 @@ use Mapper;
 class LivelocationController extends Controller
 {
         /**
-         * Display a listing of the resource.
-         *
-         * @return \Illuminate\Http\Response
-         */
-        public function index()
-        {
-            return view('admin.livelocation.livelocation',compact('livelocation'));
-        }
-
-        /**
-         * Display the specified resource.
-         *
-         * @param  \App\Models\Livelocation  $livelocation
-         * @return \Illuminate\Http\Response
-         */
-        public function show(Livelocation $livelocation)
-        {
-            return view('admin.livelocation.livelocation',compact('$livelocation'));
-        }
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        abort_if(Gate::denies('admin_vehicle_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $vehicles = Vehicle::orderBy('id','DESC')->get();
+        return view('admin.livelocation.livelocation',compact('vehicles'));
+    }
 }

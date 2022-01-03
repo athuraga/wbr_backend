@@ -1,279 +1,223 @@
 @extends('layouts.app',['activePage' => 'livelocation'])
 
-@section('title', 'LIVELOCATION')
+@section('title', 'Livelocation')
 
 @section('content')
+
     <section class="section">
         <div class="section-header">
-            <h1>{{ __('LIVELOCATION') }}</h1>
+            <h1>{{ __('Livelocation') }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="{{ url('admin/livelocation') }}">{{ __('Dashboard') }}</a>
-                </div>
-                <div class="breadcrumb-item">{{ __('LIVELOCATION') }}</div>
+                <div class="breadcrumb-item active"><a href="{{ url('admin/home') }}">{{ __('Dashboard') }}</a></div>
+                <div class="breadcrumb-item">{{ __('Livelocation') }}</div>
             </div>
         </div>
         <div class="section-body">
-            <h2 class="section-title">{{ __('LIVELOCATION') }}</h2>
-            <p class="section-lead">{{ __('Live Location Management') }}</p>
+            <h2 class="section-title">{{ __('Vehicles List') }}</h2>
             <div class="card">
-                <div class="card-header">
+                <div class="card-body table-responsive">
+                    <table id="datatable" class="table table-striped table-bordered text-center" cellspacing="0"
+                        width="100%">
+                        <thead>
+                            <tr>
+                                <th>{{ __('VIN') }}</th>
+                                <th>{{ __('Lat') }}</th>
+                                <th>{{ __('Lon') }}</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($vehicles as $vehicle)
+                                <tr>
+
+                                    <td>{{ $vehicle->license_number }}</td>
+                                    <td>{{ $vehicle->lat }}</td>
+                                    <td>{{ $vehicle->lang }}</td>
+
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-                <div class="card-body">
-                    @extends('layouts.master')
+            </div>
+            <div class="card">
+                <div class="flex-center position-ref full-height">
+                    <div class="content">
+                        <h2>Vehicles Live Location
+                        </h2>
+                        {{-- <div id="vlocations" data-field-id="{{ $vehicles }}">
+                        </div> --}}
+                        <!DOCTYPE html>
+                        <html>
 
-                @section('content')
+                        <head>
+                            <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+                            <style type="text/css">
+                                html {
+                                    height: 100%;
+                                }
 
-                    <div class="row">
+                                body {
+                                    height: 100%;
+                                    margin: 0px;
+                                    padding: 0px;
+                                }
 
-                        <div class="col-md-9">
-                            <h2>Showing <span id='spkCount'></span><span id="filterText"></span></h2>
+                                #location_canvas {
+                                    height: 100%;
+                                }
 
-                            <p id="filterPills"></p>
+                            </style>
+                            {{-- <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC2wDZend4lfhVc4oXgnWR-r3-xXe0UFxM&sensor=false"></script> --}}
+                            {{-- <script>
+                                function initialize() {
+                                    var laa = 33.88785065024179;
+                                    var lonn = -118.41315937548767;
+                                    var mapOptions = {
+                                        zoom: 10,
+                                        center: new google.maps.LatLng(laa, lonn),
+                                        mapTypeId: google.maps.MapTypeId.ROADMAP,
+                                        maxZoom: 16,
+                                        minZoom: 2
+                                    };
 
-                            @if ($filters['tagged'])
-                                <h2>and tagged <span class="tagged">{{ $filters['tagged'] }} <a
-                                            href="/map/untag">(<i class="fa fa-times"> </i>&nbsp;remove)</a></span></h2>
-                            @endif
+                                    var map = new google.maps.Map(document.getElementById('location-canvas'),
+                                        mapOptions);
 
-                        </div>
-                        @endif
+                                    var marker = new google.maps.Marker({
+                                        map: map,
+                                        draggable: false,
+                                        position: new google.maps.LatLng(laa, lonn),
+                                        icon: '/images/wbrclipartback.png'
+                                    });
 
-                        <div id="map_canvas" style="height:680px"></div>
-                        <p
-                            style='margin-top:10px; border:1px solid #ddd; border-radius:4px; padding:5px; background-color:#fcfcfc;'>
-                            <img src="/images/SpeakernetSymbol_32x32_native.png" /> Vehicles in your chosen region
-                            &nbsp;&nbsp;&nbsp;<img src="/images/SpeakernetSymbol_32x32_native_red.png" /> Vehicles that will
-                            come to your chosen region
-                        </p>
+                                    function bind(eventName) {
+                                        google.maps.event.addListener(map, eventName, function() {
+                                            common();
 
+                                        });
+                                    }
+
+                                    bind('zoom_changed');
+                                    bind('center_changed');
+                                    bind('tilesloaded');
+                                    bind('idle');
+
+                                    function common() {
+                                        var bounds = map.getBounds();
+                                        var southWest = bounds.getSouthWest();
+                                        var northEast = bounds.getNorthEast();
+                                        var getcentre = bounds.getCenter();
+                                        var ne = map.getBounds().getNorthEast();
+                                        var sw = map.getBounds().getSouthWest();
+                                        var zoom = map.getZoom();
+                                        var centre_lat = getcentre.lat();
+                                        var centre_long = getcentre.lng();
+                                        var myLatlng = new google.maps.LatLng(centre_lat, centre_long);
+                                        var mapProp = {
+                                            center: new google.maps.LatLng(centre_lat, centre_long),
+                                            zoom: zoom,
+                                            maxZoom: 16,
+                                            minZoom: 2,
+                                            mapTypeId: google.maps.MapTypeId.ROADMAP
+                                        };
+
+                                    }
+
+                                    function livloc() {
+
+                                        var locations = [
+                                            ['California', 34.0755477146572, -118.35536890917659, 1],
+                                            ['Gothenburg', 57.70709934911183, 11.969606646032718, 2],
+                                            ['Chennai', 13.00007091319314, 80.27235211815434, 3],
+                                            ['Bangalore', 13.01889811132328, 77.56257716744605, 4],
+                                            ['Delhi', 28.557001085022492, 77.09989342524587, 5],
+                                            ['Mumbai', 19.10958483688843, 72.824281495344, 6],
+                                            ['Hyderabad', 17.450721489001552, 78.38066067334638, 7],
+                                            ['Coimbatore', 11.06157357793813, 76.99572885636955, 8]
+                                        ];
+                                        var lat = parseFloat($('#lat').val());
+                                        var lng = parseFloat($('#lang').val());
+                                        var base_url = $("#mainurl").val();
+
+
+                                        var infowindow = new google.maps.InfoWindow();
+
+                                        var marker, i;
+
+                                        for (i = 0; i < locations.length; i++) {
+                                            var marker = new google.maps.Marker({
+                                                map: map,
+                                                draggable: false,
+                                                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                                                icon: '/images/wbrclipartgradient.png'
+                                            });
+
+                                        };
+
+                                        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                                            return function() {
+                                                infowindow.setContent(locations[i][0]);
+                                                infowindow.open(map, marker);
+                                            }
+                                        })(marker, i));
+
+                                        // api url
+                                        const api_url =
+                                            "http://localhost:8000/api/vehiclesloc";
+                                        var marker, j;
+                                        var vlocations = [];
+
+                                        for (j = 0; j < vlocations.length; j++) {
+                                            var marker = new google.maps.Marker({
+                                                map: map,
+                                                draggable: false,
+                                                position: new google.maps.LatLng(vlocations[j].lat, vlocations[j].lang),
+                                                icon: '/images/wbrclipartgradient.png'
+                                            });
+
+                                        };
+
+                                        google.maps.event.addListener(marker, 'click', (function(marker, j) {
+                                            return function() {
+                                                infowindow.setContent(locations[j][0]);
+                                                infowindow.open(map, marker);
+                                            }
+                                        })(marker, j));
+                                    }
+
+                                    function bind(eventName) {
+                                        google.maps.event.addListener(map, eventName, function() {
+                                            livloc();
+
+                                        });
+                                    }
+
+                                }
+
+                                google.maps.event.addDomListener(window, 'resize', initialize);
+                                google.maps.event.addDomListener(window, 'load', initialize);
+                            </script> --}}
+                            {{-- <script src="{{ asset('js/livloc.js') }}"></script> --}}
+
+                            <div id='location-canvas' style='width:100%;height:500px;'> </div>
+
+                            <script>
+                                var vlocations = @json($vehicles);
+                            </script>
+                        </head>
+
+                        </html>
                     </div>
 
-                    @include('talks._sidebar',['type' => 'Filter the Vehicles','submitFilter'=>false])
-
-                    {{-- @include('talks._search') --}}
-
                 </div>
-
             </div>
         </div>
     </section>
 @endsection
-
-@section('page-js')
-    <script>
-        var map;
-        var speaker_markers = new Array();
-        var speaker_pins = new Array();
-        var infowindow;
-        var mapScheme;
-
-        window.onload = function() {
-            initMap();
-            applyFilter('');
-            monitorFilters(map);
-        };
-
-        function initMap(details) {
-
-            var myOptions = {
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                mapTypeControl: true,
-                scaleControl: true,
-                streetViewControl: false,
-                center: {
-                    lat: 53.802,
-                    lng: -1.261
-                },
-                zoom: 7,
-                draggableCursor: 'default',
-                styles: mapScheme,
-            };
-
-            map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-
-            infowindow = new google.maps.InfoWindow({
-                content: 'Please wait',
-                pixelOffset: new google.maps.Size(0, -16),
-            });
-
-            recenter(map);
-            return map;
-        }
-
-        function recenter(map) {
-            axios.get('{{ route('map.recenter') }}')
-                .then(function(response) {
-                    map.panTo({
-                        lat: parseFloat(response.data.lat),
-                        lng: parseFloat(response.data.lng)
-                    });
-                    map.setZoom(parseInt(response.data.z));
-                });
-        }
-
-        function loadMarkers(map) {
-            infowindow.close();
-
-            // clear any current markers
-            speaker_pins.forEach(function(marker) {
-                marker.setMap(null);
-            });
-            speaker_pins = [];
-            speaker_markers = [];
-
-            axios.get('{{ $specific ? route('map.getSpecificSpeaker', $specific) : route('map.getSpeakers') }}')
-                .then(function(response) {
-
-                    response.data.forEach(function(speaker, index) {
-                        addSpeakerMarker(speaker, infowindow, index);
-                    });
-
-                    updateSpeakerCount(response.data.length);
-                })
-                .catch(function(response) {
-                    console.log(response);
-                });
-
-        }
-
-        function updateSpeakerCount(count) {
-            document.getElementById('spkCount').textContent = count;
-            $('#spkCount').addClass('spkCountChanged');
-            setTimeout(function() {
-                $('#spkCount').removeClass('spkCountChanged');
-            }, 3000);
-        }
-
-        function addSpeakerMarker(speaker, infowindow, index) {
-            var dodge = new Array(
-                [0, 0],
-                [+0.006, -0.01],
-                [-0.006, +0.01],
-                [-0.006, -0.01],
-                [+0.006, +0.01],
-                [+0.006, 0],
-                [+0, +0.01],
-                [+0, -0.01],
-                [-0.006, 0]
-            );
-
-            region = document.getElementById('region').value
-
-            if (region == '' || speaker.regioncode == region) {
-                icon = '/images/SpeakernetSymbol_32x32_native.png'
-
-            } else {
-                icon = '/images/SpeakernetSymbol_32x32_native_red.png'
-            }
-
-            var pin = new google.maps.Marker({
-                position: {
-                    lat: parseFloat(speaker.latitude) + parseFloat(dodge[index % 9][0]),
-                    lng: parseFloat(speaker.longitude) + parseFloat(dodge[index % 9][1])
-                },
-                map: map,
-                icon: icon
-            });
-
-            speaker_markers.push(speaker);
-            speaker_pins.push(pin);
-
-            google.maps.event.addListener(pin, 'click', function(ev) {
-                infowindow.setPosition(ev.latLng);
-                infowindow.open(map);
-                infowindow.setContent(speaker.speaker.replace(/\b\w/g, function(l) {
-                    return l.toUpperCase()
-                }));
-                fillCard(speaker, map, infowindow);
-            }, {
-                passive: true
-            });
-
-        }
-
-        function fillCard(speaker, map, infowindow) {
-            url = '/map/speaker/' + speaker.id + '?lat=' + map.getCenter().lat() + '&lng=' + map.getCenter().lng() + '&z=' +
-                map.getZoom();
-
-            axios.get(url)
-                .then(function(response) {
-                    infowindow.setContent(response.data);
-                })
-                .catch(function(response) {
-                    console.log(response);
-                });
-
-        }
-
-        function monitorFilters(map) {
-            $('#category').on('change', function() {
-                applyFilter('cat=' + this.value);
-            });
-
-            $('#fee').on('change', function() {
-                applyFilter('fee=' + this.value);
-            });
-
-            $('#region').on('change', function() {
-                applyFilter('region=' + this.value);
-            });
-
-            $('#recency').on('change', function() {
-                applyFilter('recency=' + this.value);
-            });
-
-            $('#notice').on('change', function() {
-                applyFilter('notice=' + this.value);
-            });
-
-            $('#online').on('change', function() {
-                applyFilter('online=' + this.value);
-            });
-        }
-
-        function applyFilter(filter) {
-            axios.post('/filter?' + filter)
-                .then(function(response) {
-                    loadMarkers(map);
-                    setFilters(response.data);
-                    setFilterString(response.data);
-                });
-        }
-
-        function setFilters(filters) {
-            filterItems = (Object.keys(filters));
-            var filterString = '';
-            filterItems.forEach(function(item) {
-                filterString += '<span class="filterpill">' + filters[item] +
-                    '<a href="#" onclick="removeFilter(\'' + item + '\')">X</a></span>';
-            });
-
-            document.getElementById('filterPills').innerHTML = filterString;
-        }
-
-        function setFilterString(filters) {
-            if (Object.keys(filters).length > 0) {
-                document.getElementById('filterText').innerHTML = ' vehicles matching your filters';
-            } else {
-                document.getElementById('filterText').innerHTML = ' vehicles, with no filters applied';
-            }
-        }
-
-        function removeFilter(filter) {
-            axios.delete('/removefilter/' + filter)
-                .then(function(response) {
-                    loadMarkers(map);
-                    setFilters(response.data);
-                    setFilterString(response.data);
-                    $('#' + filter).get(0).selectedIndex = 0;
-                });
-        }
-
-        @include('guest._mapScheme')
-    </script>
-
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ config('app.maps.key') }}&v=3">
-    </script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
+@section('js')
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{ App\Models\GeneralSetting::first()->map_key }}&callback=initialize"
+        defer></script>
+    <script src="{{ asset('js/livloc.js') }}"></script>
 @endsection

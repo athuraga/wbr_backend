@@ -164,7 +164,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Craftsys\Msg91\Msg91LaravelServiceProvider::class,
-        Cornford\Googlmapper\MapperServiceProvider::class,
+        GoogleMaps\ServiceProvider\GoogleMapsServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -230,6 +230,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-    ],
+        'GoogleMaps' => GoogleMaps\Facade\GoogleMapsFacade::class,
+        ],
 
 ];
